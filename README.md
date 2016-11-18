@@ -26,6 +26,22 @@ All the services expose a set of shared helper methods:
 | `request (url, options)` | `promise` | This is used internally. Promisified xhr that does not basic handling of Portal's 400-in-a-200 errors |
 | `parseServiceUrl (url)` | Parses up the url and returns a hash of useful information - the service url, type, layerId if present, orgId if hosted |
 
+### Feature Service
+All the services expose a set of shared helper methods:
+
+| Method |  Returns |Description |
+| --- | --- | --- |
+| `query(url, options)` | promise | Query the feature service |
+| `getById(url, id)` | promise | Returns the record by Id |
+| `updateFeature(url, feature, token)` | promise | Update a Feature |
+| `updateFeatures(url, features, token)` | promise | Update a set of Features |
+| `addFeature(url, feature, token)` | promise | Adds a Feature |
+| `addFeatures(url, features, token)` | promise | Adds a set of Features |
+| `deleteFeature(url, feature, token)` | promise | Delete a Feature |
+| `deleteFeatures(url, features, token)` | promise | Deletes a set of Features |
+| `applyEdits(url, adds, updated, deletes, token)` | promise | Applies a set of edits to the service |
+| `getLayerInfo(url)` | promise | Returns the `f=json` for the service |
+
 ### Handling Error Conditions
 Barring a catastrophic network or server failure, the ArcGIS Server API will always return a 200, which main contain error information in json.
 

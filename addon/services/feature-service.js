@@ -25,6 +25,14 @@ export default Ember.Service.extend(serviceMixin, {
   },
 
   /**
+   * Get a record by id
+   */
+  getById (url, id) {
+    url = `${url}/${id}?f=json`;
+    return this.request(url, {method: 'GET'});
+  },
+
+  /**
    * Update a single feature
    */
   updateFeature (url, feature, token) {
