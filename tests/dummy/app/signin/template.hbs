@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="col-sm-6">
+    {{#if usingIframe}}
+    <h2>ArcGIS IFrame Authentication</h2>
+    <p>This style of login only works for apps hosted on *.arcgis.com domains.
+    This allows for the authentication to occur in an iframe instead of a full-page
+    redirect or a pop-out window.</p>
+    {{else}}
+    <h2>ArcGIS Application Authentication</h2>
+    <p>Press the button below to open the pop-up and sign-in.</p>
+    <button class="btn btn-primary" type="button" {{action 'signin'}}>Show Sign In</button>
+    {{/if}}
+  </div>
+  <div class="col-sm-6">
+    {{torii-iframe-placeholder}}
+  </div>
+</div>
+{{outlet}}

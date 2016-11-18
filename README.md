@@ -1,13 +1,33 @@
-# Ember-arcgis-server-services
+# ember-arcgis-server-services
 
-This README outlines the details of collaborating on this Ember addon.
+Ember Services for working with ArcGIS Server Services.
+
+**Note**  This is still a very nascent project, and things will change.
+
+If you use this project, be sure to lock to a specific version in your `package.json`.
+
+We expect this project to have many releases before the 1.0.0 "Public API" stabilization.
+
+## ArcGIS Server Services
+After adding this to your project, you will have a number of services available for injection into your routes/controllers/services.
+
+## Dependencies
+This project is now using `ember-network/fetch` to enable fastboot compatibility. Please also `ember install ember-network`
 
 ## Installation
+* `ember install ember-arcgis-server-services`
 
-* `git clone <repository-url>` this repository
-* `cd ember-arcgis-server-services`
-* `npm install`
-* `bower install`
+### Shared Methods
+All the services expose a set of shared helper methods:
+
+| Method |  Returns |Description |
+| --- | --- | --- |
+| `encodeForm` | `string` | This is used internally. Formats an object into a html form. In most cases, not necessary to call this.|
+| `request (url, options)` | `promise` | This is used internally. Promisified xhr that does not basic handling of Portal's 400-in-a-200 errors |
+| `parseServiceUrl (url)` | Parses up the url and returns a hash of useful information - the service url, type, layerId if present, orgId if hosted |
+
+### Handling Error Conditions
+Barring a catastrophic network or server failure, the ArcGIS Server API will always return a 200, which main contain error information in json.
 
 ## Running
 

@@ -1,0 +1,4 @@
+{{#if canEdit}}
+  <li>{{#link-to 'sites.site.edit' model.attributes.OBJECTID class="btn btn-default"}}<span class="glyphicon glyphicon-pencil"></span>{{/link-to}}</li>
+  <li><button class="btn btn-danger" {{action 'delete' model.attributes.OBJECTID}}><span class="glyphicon glyphicon-trash"></span></button></li>
+{{/if}}

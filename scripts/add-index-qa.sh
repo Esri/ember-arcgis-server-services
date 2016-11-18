@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/admin/services/sitedomains/FeatureServer/0/addToDefinition' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: en-US,en;q=0.8' -H 'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' -H 'Accept: application/json, text/plain, */*'  --data 'f=json&token=ZWDzMIXEAZSDKLrT-4PjcBnQJtYeIsFXXvo9x3Mpwv2Z-j7JERj2giOQr59v0OKZ2uImt7MRzmhIV7nHFUEIHpwCIQUIZPnMRAk74SGiIURgDJsFjiqMf5tn2QHbn4WbrGixCCMzZV0H_AshFRfu5eWxDN_tSS0fjrlCp_s8EJjz8QHn555RH19KtOu5T5iA&addToDefinition={"indexes":[{"name":"idx_domain_unique","fields":"domain","isUnique":true,"isAscending":false,"description":"Force Domain to be unique"}]}' --compressed

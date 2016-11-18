@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="col-sm-12">
+    <div class="jumbotron">
+      <h1>Ember ArcGIS Server Services</h1>
+      <p>A set of Ember Services that abstract working with ArcGIS Server or Hosted Services.</p>
+      <p><strong>Note:</strong> This addon is under development with feature priority defined by ArcGIS Open Data requirements. PR's accepted for additional functionality.</p>
+      <p>
+        {{#if session.isAuthenticated}}
+          <button class="btn btn-primary" type='button' {{action 'signout'}}>Sign Out</button>
+        {{else}}
+          {{link-to 'Sign In' 'signin' class="btn btn-primary" }}
+        {{/if}}
+      </p>
+    </div>
+
+    {{#if session.isAuthenticated}}
+    <div class="alert alert-info" role="alert">
+      Hello {{session.currentUser.username }}, you are currently authenticated.
+    </div>
+    {{else}}
+    <div class="alert alert-danger" role="alert">
+      You are not currently authenticated.
+    </div>
+    {{/if}}
+  </div>
+</div>

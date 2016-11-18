@@ -1,6 +1,6 @@
 /* jshint node: true */
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   var ENV = {
     modulePrefix: 'dummy',
     environment: environment,
@@ -14,10 +14,25 @@ module.exports = function(environment) {
     },
 
     APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
+      portalBaseUrl: 'https://www.arcgis.com', // 'https://qaext.arcgis.com',
+      arcgisPortal: {
+        domain: 'arcgis.com',
+        env: 'www', // 'qaext',
+        maps: 'maps' // 'mapsqa',
+      }
+    },
+    torii: {
+      sessionServiceName: 'session',
+      providers: {
+        'arcgis-oauth-bearer': {
+          apiKey: 'XFk8D7A6TMdFJSuW' // production
+          // apiKey: 'Ll5erY6niWgZS1eV' //qa
+        }
+      }
     }
   };
+
+  ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = ENV.APP.portalBaseUrl;
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -39,7 +54,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.locationType = 'hash';
+    // ENV.rootURL = '/ember-arcgis-server-services/';
   }
 
   return ENV;
