@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import ENV from '../../config/environment';
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   featureService: Ember.inject.service('feature-service'),
@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
         return;
       }
       // check if there is an entry for domain...
-      let url = 'https://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/sitedomains/FeatureServer/0';
+      let url = ENV.APP.domainServiceUrl; // 'https://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/sitedomains/FeatureServer/0';
       let options = {
         includeGeometry: false,
         outFields: '*'
@@ -39,7 +39,8 @@ export default Ember.Controller.extend({
             attributes: {
               domain: this.get('domain'),
               siteId: this.get('siteId'),
-              name: this.get('siteName')
+              siteTitle: this.get('siteName'),
+              clientKey: this.get('clientKey')
             }
           };
           let token = this.get('session.token');

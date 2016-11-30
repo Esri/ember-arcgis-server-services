@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import ENV from '../../config/environment';
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
   featureService: Ember.inject.service('feature-service'),
@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
     delete (objectId) {
       Ember.debug('Deleting Id: ' + objectId);
       let token = this.get('session.token');
-      let url = 'https://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/sitedomains/FeatureServer/0';
+      let url = ENV.APP.domainServiceUrl; // 'https://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/sitedomains/FeatureServer/0';
       this.get('featureService').deleteFeature(url, objectId, token)
       .then((result) => {
         // instead of refreshing the model for the list, just remove the entry

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import ENV from '../../config/environment';
 export default Ember.Route.extend({
   featureService: Ember.inject.service('feature-service'),
 
@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   },
 
   model (params) {
-    let url = 'https://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/sitedomains/FeatureServer/0';
+    let url = ENV.APP.domainServiceUrl; // 'https://services.arcgis.com/bkrWlSKcjUDFDtgw/arcgis/rest/services/sitedomains/FeatureServer/0';
     let options = {
       includeGeometry: false,
       outFields: '*'

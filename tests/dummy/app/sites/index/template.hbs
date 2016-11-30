@@ -17,16 +17,18 @@
           <td>Domain</td>
           <td>Site Id</td>
           <td>Owner</td>
+          <td>Client Key</td>
           <td>Actions</td>
         </tr>
       </thead>
       <tbody>
         {{#each model.features as |row|}}
         <tr>
-          <td>{{row.attributes.name}}</td>
+          <td>{{row.attributes.siteTitle}}</td>
           <td>{{row.attributes.domain}}</td>
           <td>{{row.attributes.siteId}}</td>
           <td>{{row.attributes.Creator}}</td>
+          <td>{{row.attributes.clientKey}}</td>
           <td>{{row-edit-controls model=row onDelete=(action 'delete')}}</td>
         </tr>
         {{/each}}

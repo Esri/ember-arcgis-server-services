@@ -11,7 +11,11 @@
     </div>
     <div class="form-group">
       <label for="">Site Name</label>
-      {{input value=model.attributes.name class='form-control' placeholder="Site Name"}}
+      {{input value=model.attributes.siteTitle class='form-control' placeholder="Site Name"}}
+    </div>
+    <div class="form-group">
+      <label for="">Client Key</label>
+      {{input value=model.attributes.clientKey class='form-control' placeholder="Site Name"}}
     </div>
     <button type="button" class="btn btn-primary" {{action 'save'}}>Save</button>
   </div>
