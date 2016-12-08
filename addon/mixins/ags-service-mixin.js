@@ -2,7 +2,7 @@ import Ember from 'ember';
 import fetch from 'ember-network/fetch';
 
 export default Ember.Mixin.create({
-  //session: Ember.inject.service('session'),
+  session: Ember.inject.service('session'),
 
   hostAppConfig: Ember.computed(function () {
     return Ember.getOwner(this).resolveRegistration('config:environment');
