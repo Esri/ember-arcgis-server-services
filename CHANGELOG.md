@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Fixed
 - fix watch error caused by missing folder
+- remove ember-ajax and related code
 
 ## 0.1.1
 ### Added
