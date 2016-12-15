@@ -41,7 +41,7 @@ module.exports = function (environment) {
     ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'ifq94vTWyyZclwNz';
     // if you need to test against QA API/data:
     // const env = 'qa';
-    // ENV.APP.domainServiceUrl: 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0';
+    // ENV.APP.domainServiceUrl = 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0';
 
     ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = `https://${env}ext.arcgis.com`;
   }
@@ -49,6 +49,7 @@ module.exports = function (environment) {
   if (environment === 'surge') {
     ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'ifq94vTWyyZclwNz';
     ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = 'https://devext.arcgis.com';
+    ENV.APP.domainServiceUrl = 'https://servicesdev.arcgis.com/LjjARY1mkhxulWPq/arcgis/rest/services/sitedomains/FeatureServer/0';
   }
 
   if (environment === 'github') {
@@ -56,6 +57,8 @@ module.exports = function (environment) {
     ENV.rootURL = '/ember-arcgis-server-services/';
     ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'Ll5erY6niWgZS1eV';
     ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = 'https://qaext.arcgis.com';
+    ENV.APP.domainServiceUrl = 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0';
+
   }
 
   if (environment === 'test') {
