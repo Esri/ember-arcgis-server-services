@@ -142,14 +142,12 @@ export default Ember.Mixin.create({
     Ember.debug('Making request to ' + url);
 
     return fetch(url, opts)
-      .then(this.checkStatusAndParseJson)
-      .catch((err) => {
-        if (err.message === 'Network request failed' && opts.method === 'GET') {
-          // try again with jsonp
-          return this.get('ajax').request(url, {
-            dataType: 'jsonp'
-          });
-        }
-      });
+      .then(this.checkStatusAndParseJson);
+      // TODO: try JSONP if GET request fails (to support older IE versions)
+      // .catch((err) => {
+      //   if (err.message === 'Network request failed' && opts.method === 'GET') {
+      //     // need to install ember-ajax or fetch-jsonp to try a JSONP request
+      //   }
+      // });
   }
 });

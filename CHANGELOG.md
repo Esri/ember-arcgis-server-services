@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.4
+### Changed
+- remove ember-ajax and related code
+
 ## 0.1.3
 ### Fixed
 - fix watch error caused by missing folder
