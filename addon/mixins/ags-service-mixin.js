@@ -67,7 +67,7 @@ export default Ember.Mixin.create({
 
   encodeForm (form = {}) {
     return Object.keys(form).map((key) => {
-      return [key, form[key]].map(encodeURI).join('=');
+      return [key, form[key]].map(encodeURIComponent).join('=');
     }).join('&');
   },
 

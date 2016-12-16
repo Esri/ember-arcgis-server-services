@@ -14,7 +14,7 @@ module.exports = function (environment) {
     },
 
     APP: {
-      domainServiceUrl:'http://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0',
+      domainServiceUrl: 'http://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0',
       portalBaseUrl: 'https://qaext.arcgis.com', // 'https://www.arcgis.com', //
       arcgisPortal: {
         domain: 'arcgis.com',
@@ -36,11 +36,29 @@ module.exports = function (environment) {
   ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = ENV.APP.portalBaseUrl;
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    const env = 'dev';
+    ENV.APP.domainServiceUrl = 'https://servicesdev.arcgis.com/LjjARY1mkhxulWPq/arcgis/rest/services/sitedomains/FeatureServer/0';
+    ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'ifq94vTWyyZclwNz';
+    // if you need to test against QA API/data:
+    // const env = 'qa';
+    // ENV.APP.domainServiceUrl = 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0';
+
+    ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = `https://${env}ext.arcgis.com`;
+  }
+
+  if (environment === 'surge') {
+    ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'ifq94vTWyyZclwNz';
+    ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = 'https://devext.arcgis.com';
+    ENV.APP.domainServiceUrl = 'https://servicesdev.arcgis.com/LjjARY1mkhxulWPq/arcgis/rest/services/sitedomains/FeatureServer/0';
+  }
+
+  if (environment === 'github') {
+    ENV.locationType = 'hash';
+    ENV.rootURL = '/ember-arcgis-server-services/';
+    ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'Ll5erY6niWgZS1eV';
+    ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = 'https://qaext.arcgis.com';
+    ENV.APP.domainServiceUrl = 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0';
+
   }
 
   if (environment === 'test') {
