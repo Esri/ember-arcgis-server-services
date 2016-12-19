@@ -5,12 +5,8 @@ export default Ember.Component.extend({
   layout,
   tagName: 'ul',
   classNames: ['row-edit-controls'],
-  session: Ember.inject.service('session'),
-  userName: Ember.computed('session.currentUser', function () {
-    return this.get('session.currentUser.username');
-  }),
   canEdit: Ember.computed('model', function () {
-    return (this.get('userName') === this.get('model.attributes.Creator'));
+    return (this.get('currentUser') === this.get('model.attributes.Creator'));
   }),
 
   actions: {

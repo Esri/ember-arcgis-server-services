@@ -27,6 +27,8 @@ export default Ember.Controller.extend({
     return `https://${urlKey}.${cbu}/home/item.html?id=`;
   }),
 
+  currentUser: Ember.computed.reads('session.currentUser.username'),
+
   actions: {
     filter () {
       this.set('q', this.get('query'));

@@ -29,7 +29,7 @@
           <td>{{row.attributes.siteId}}</td>
           <td>{{row.attributes.Creator}}</td>
           <td>{{row.attributes.clientKey}}</td>
-          <td>{{row-edit-controls model=row onDelete=(action 'delete')}}</td>
+          <td>{{row-edit-controls model=row currentUser=currentUser onDelete=(action 'delete')}}</td>
         </tr>
         {{/each}}
       </tbody>
@@ -42,3 +42,4 @@
   {{/if}}
   </div>
 </div>
+currentUser: {{currentUser}}
