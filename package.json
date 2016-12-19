@@ -47,7 +47,7 @@
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-standard": "^2.0.0",
     "loader.js": "^4.0.1",
-    "torii-provider-arcgis": "0.3.1"
+    "torii-provider-arcgis": "0.4.3"
   },
   "keywords": [
     "ember-addon"

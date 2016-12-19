@@ -14,13 +14,13 @@ module.exports = function (environment) {
     },
 
     APP: {
-      domainServiceUrl: 'http://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0',
-      portalBaseUrl: 'https://qaext.arcgis.com', // 'https://www.arcgis.com', //
-      arcgisPortal: {
-        domain: 'arcgis.com',
-        env: 'qaext',
-        maps: 'mapsqa',
-      }
+      // domainServiceUrl: 'http://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0',
+      // portalBaseUrl: 'https://qaext.arcgis.com', // 'https://www.arcgis.com', //
+      // arcgisPortal: {
+      //   domain: 'arcgis.com',
+      //   env: 'qaext',
+      //   maps: 'mapsqa',
+      // }
     },
     torii: {
       sessionServiceName: 'session',

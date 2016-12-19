@@ -19,6 +19,7 @@ export default Ember.Route.extend({
     } else {
       options.where = encodeURI('1=1');
     }
+
     return this.get('featureService').query(url, options);
   }
 });
