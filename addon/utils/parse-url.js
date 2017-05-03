@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const serverRegex = new RegExp(/.+(?:map|feature|image)server/i);
 
 /**
  * Parse up the url so we have a better idea what we are dealing with
@@ -48,4 +49,9 @@ export default function parseUrl (url) {
     parsed.orgId = url.split('/')[4];
   }
   return parsed;
+}
+
+export function parseServerUrl (url) {
+  const match = url.match(serverRegex);
+  if (match) return match[0];
 }

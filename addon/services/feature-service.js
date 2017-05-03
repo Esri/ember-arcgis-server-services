@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import serviceMixin from '../mixins/ags-service-mixin';
+import layerMixin from '../mixins/layers';
 
-export default Ember.Service.extend(serviceMixin, {
+export default Ember.Service.extend(layerMixin, serviceMixin, {
 
   // /**
   //  * Parse url and return the type of the service
