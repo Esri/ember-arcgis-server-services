@@ -6,10 +6,6 @@ export default Ember.Mixin.create({
     this._super(); // ensure a good citizen in the super chain
   },
 
-  getServerInfo (url) {
-    const server = parseServerUrl(url);
-    return this.request(`${server}?f=json`);
-  },
   /**
    * Get the layer info
    */
@@ -19,13 +15,16 @@ export default Ember.Mixin.create({
       const server = parseServerUrl(url);
       layerUrl = `${server}/${options.layer}`;
     }
-    return this.request(layerUrl + '?f=json');
+    return this.request(layerUrl + '?f=json', options);
   },
 
-  getLayersInfo (url) {
+  /**
+   * Get info about all layers
+   */
+  getLayersInfo (url, options) {
     const server = parseServerUrl(url);
     const layersUrl = `${server}/layers?f=json`;
-    return this.request(layersUrl)
+    return this.request(layersUrl, options)
     .then(layerInfo => {
       const merged = [...layerInfo.layers, ...layerInfo.tables];
       this.set('layers', merged);
@@ -46,8 +45,8 @@ export default Ember.Mixin.create({
   /**
    * Get a record by id
    */
-  getById (url, id) {
+  getById (url, id, options) {
     url = `${url}/${id}?f=json`;
-    return this.request(url, {method: 'GET'});
+    return this.request(url, options);
   },
 });

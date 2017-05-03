@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
     this._super(); // ensure a good citizen in the super chain
   },
 
-  session: Ember.inject.service('session'),
+  // session: Ember.inject.service('session'),
 
   hostAppConfig: Ember.computed(function () {
     return Ember.getOwner(this).resolveRegistration('config:environment');
@@ -20,7 +20,7 @@ export default Ember.Mixin.create({
    * Make an arbitrary request to the server
    */
   request (url, options = {}) {
-    options.token = this.get('session.token');
+    // options.token = this.get('session.token');
     options.method = options.method || 'GET';
     return agoRequest(url, options);
   },
@@ -29,15 +29,15 @@ export default Ember.Mixin.create({
    * Get the service info
    * TODO what's using this? can it be removed?
    */
-  getServiceInfo (url) {
-    return this.request(url + '?f=json');
+  getServiceInfo (url, options) {
+    return this.request(url + '?f=json', options);
   },
 
   /**
   * Get the base server info
    */
-  getServerInfo (url) {
+  getServerInfo (url, options) {
     const server = parseServerUrl(url);
-    return this.request(`${server}?f=json`);
+    return this.request(`${server}?f=json`, options);
   },
 });
