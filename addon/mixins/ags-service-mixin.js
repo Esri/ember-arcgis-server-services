@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import agoRequest from '../utils/request';
-import parseUrl from '../utils/parse-url';
+import { parseServerUrl, parseType } from '../utils/parse-url';
 
 export default Ember.Mixin.create({
   init: function () {
@@ -13,9 +13,12 @@ export default Ember.Mixin.create({
     return Ember.getOwner(this).resolveRegistration('config:environment');
   }),
 
-  // export it here so as not to break the API
-  parseUrl,
+  // TODO consider removing this at a major version
+  parseServiceUrl: parseType,
 
+  /**
+   * Make an arbitrary request to the server
+   */
   request (url, options = {}) {
     options.token = this.get('session.token');
     options.method = options.method || 'GET';
@@ -24,8 +27,17 @@ export default Ember.Mixin.create({
 
   /**
    * Get the service info
+   * TODO what's using this? can it be removed?
    */
   getServiceInfo (url) {
     return this.request(url + '?f=json');
+  },
+
+  /**
+  * Get the base server info
+   */
+  getServerInfo (url) {
+    const server = parseServerUrl(url);
+    return this.request(`${server}?f=json`);
   },
 });
