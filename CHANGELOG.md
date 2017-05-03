@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 0.2.0
 ### Added
 * Map Service supports getLayerInfo, getLayersInfo, getServerInfo
 * New "Vector Service" supports common features between map and feature service

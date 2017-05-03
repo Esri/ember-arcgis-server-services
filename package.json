@@ -1,9 +1,8 @@
 {
   "name": "ember-arcgis-server-services",
-  "version": "0.1.4",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.2.0",
+  "description": "Ember services for dealing with ArcGIS Map, Feature and Image Servers",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
@@ -12,7 +11,10 @@
     "test": "ember try:each",
     "deploy": "ember github-pages:commit --environment=github --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\";"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArcGIS/ember-arcgis-server-services.git"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -57,5 +59,10 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  }
+  },
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/ArcGIS/ember-arcgis-server-services/issues"
+  },
+  "homepage": "https://github.com/ArcGIS/ember-arcgis-server-services#readme"
 }
