@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { parseServerUrl } from '../utils/parse-url';
+import encodeForm from '../utils/encode-form';
 
 export default Ember.Mixin.create({
   init: function () {
@@ -25,21 +26,21 @@ export default Ember.Mixin.create({
     const server = parseServerUrl(url);
     const layersUrl = `${server}/layers?f=json`;
     return this.request(layersUrl, options)
-    .then(layerInfo => {
-      const merged = [...layerInfo.layers, ...layerInfo.tables];
-      this.set('layers', merged);
-      return merged;
-    })
-    .catch(e => Promise.reject(e));
+      .then(layerInfo => {
+        const merged = [...layerInfo.layers, ...layerInfo.tables];
+        this.set('layers', merged);
+        return merged;
+      })
+      .catch(e => Promise.reject(e));
   },
 
   /**
    * Search for records
    */
   query (url, options) {
-    let encoded = this.encodeForm(options);
+    let encoded = encodeForm(options);
     url = url + '/query?f=json&' + encoded;
-    return this.request(url, {method: 'GET'});
+    return this.request(url, { method: 'GET' });
   },
 
   /**
@@ -48,5 +49,5 @@ export default Ember.Mixin.create({
   getById (url, id, options) {
     url = `${url}/${id}?f=json`;
     return this.request(url, options);
-  },
+  }
 });
