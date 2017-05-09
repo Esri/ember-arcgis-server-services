@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import fetch from 'ember-network/fetch';
 import addToken from './add-token';
+import encodeForm from './encode-form';
+
 /**
  * Fetch based request method
  */
@@ -38,14 +40,6 @@ export default function request (url, opts = {}) {
   //     // need to install ember-ajax or fetch-jsonp to try a JSONP request
   //   }
   // });
-}
-
-function encodeForm (form = {}) {
-  return Object.keys(form)
-    .map(key => {
-      return [key, form[key]].map(encodeURIComponent).join('=');
-    })
-    .join('&');
 }
 
 /**
