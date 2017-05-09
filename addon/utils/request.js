@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import fetch from 'ember-network/fetch';
+import addToken from './add-token';
 /**
  * Fetch based request method
  */
@@ -26,7 +27,7 @@ export default function request (url, opts = {}) {
   }
   opts.redirect = 'follow';
   opts.mode = 'cors';
-  url = `${url}${tokenFragment(url, opts.token)}`;
+  url = addToken(url, opts.token);
 
   Ember.debug('Making request to ' + url);
 
@@ -37,17 +38,6 @@ export default function request (url, opts = {}) {
   //     // need to install ember-ajax or fetch-jsonp to try a JSONP request
   //   }
   // });
-}
-
-export function tokenFragment (url, token) {
-  // append the token
-  if (token) {
-    if (url.indexOf('?') > -1) {
-      return `&token=${token}`;
-    } else {
-      return `?token=${token}`;
-    }
-  }
 }
 
 function encodeForm (form = {}) {
