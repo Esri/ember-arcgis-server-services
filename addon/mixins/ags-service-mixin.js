@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import agoRequest from '../utils/request';
 import { parseServerUrl, parseType } from '../utils/parse-url';
+import shouldAddToken from '../utils/should-add-token';
 
 export default Ember.Mixin.create({
   init: function () {
     this._super(); // ensure a good citizen in the super chain
   },
 
-  // session: Ember.inject.service('session'),
+  session: Ember.inject.service(),
 
   hostAppConfig: Ember.computed(function () {
     return Ember.getOwner(this).resolveRegistration('config:environment');
@@ -20,6 +21,9 @@ export default Ember.Mixin.create({
    * Make an arbitrary request to the server
    */
   request (url, options = {}) {
+    if (shouldAddToken(url, this.get('session.portal.id'))) {
+      options.token = this.get('session.token');
+    }
     // options.token = this.get('session.token');
     options.method = options.method || 'GET';
     return agoRequest(url, options);
@@ -39,5 +43,5 @@ export default Ember.Mixin.create({
   getServerInfo (url, options) {
     const server = parseServerUrl(url);
     return this.request(`${server}?f=json`, options);
-  },
+  }
 });
