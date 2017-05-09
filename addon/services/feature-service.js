@@ -4,27 +4,6 @@ import layerMixin from '../mixins/layers';
 
 export default Ember.Service.extend(layerMixin, serviceMixin, {
 
-  // /**
-  //  * Parse url and return the type of the service
-  //  */
-  // getServiceType ( url ) {
-  //
-  // },
-  //
-  // getInfo (url) {
-  //   //  if single layer, return the layerInfo
-  //   //  if multilayer, return serviceInfo
-  // },
-
-  /**
-   * Search for records
-   */
-  query (url, options) {
-    let encoded = this.encodeForm(options);
-    url = url + '/query?f=json&' + encoded;
-    return this.request(url, {method: 'GET'});
-  },
-
   /**
    * Get a record by id
    */
