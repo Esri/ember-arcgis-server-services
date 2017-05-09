@@ -9,13 +9,13 @@ export default function request (url, opts = {}) {
     // actually does care about this header
     if (!opts.headers) {
       opts.headers = {
-        'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+        Accept: 'application/json, application/xml, text/plain, text/html, *.*',
         'Content-Type': 'application/x-www-form-urlencoded'
       };
     }
     // if a body was passed, we need to set the content type to multipart
     if (opts.body) {
-      delete opts.headers['Content-Type'];// = 'multipart/form-data';
+      delete opts.headers['Content-Type']; // = 'multipart/form-data';
     }
 
     // if we have a data, create a formData from it
@@ -26,32 +26,36 @@ export default function request (url, opts = {}) {
   }
   opts.redirect = 'follow';
   opts.mode = 'cors';
-
-  // append the token
-  if (opts.token) {
-    if (url.indexOf('?') > -1) {
-      url = url + '&token=' + opts.token;
-    } else {
-      url = url + '?token=' + opts.token;
-    }
-  }
+  url = `${url}${tokenFragment(url, opts.token)}`;
 
   Ember.debug('Making request to ' + url);
 
-  return fetch(url, opts)
-    .then(checkStatusAndParseJson);
-    // TODO: try JSONP if GET request fails (to support older IE versions)
-    // .catch((err) => {
-    //   if (err.message === 'Network request failed' && opts.method === 'GET') {
-    //     // need to install ember-ajax or fetch-jsonp to try a JSONP request
-    //   }
-    // });
+  return fetch(url, opts).then(checkStatusAndParseJson);
+  // TODO: try JSONP if GET request fails (to support older IE versions)
+  // .catch((err) => {
+  //   if (err.message === 'Network request failed' && opts.method === 'GET') {
+  //     // need to install ember-ajax or fetch-jsonp to try a JSONP request
+  //   }
+  // });
+}
+
+export function tokenFragment (url, token) {
+  // append the token
+  if (token) {
+    if (url.indexOf('?') > -1) {
+      return `&token=${token}`;
+    } else {
+      return `?token=${token}`;
+    }
+  }
 }
 
 function encodeForm (form = {}) {
-  return Object.keys(form).map((key) => {
-    return [key, form[key]].map(encodeURIComponent).join('=');
-  }).join('&');
+  return Object.keys(form)
+    .map(key => {
+      return [key, form[key]].map(encodeURIComponent).join('=');
+    })
+    .join('&');
 }
 
 /**
@@ -62,7 +66,7 @@ function checkStatusAndParseJson (response) {
   Ember.debug('Fetch request status: ' + response.status);
   if (response.status >= 200 && response.status < 300) {
     // check if this is one of those groovy 200-but-a-400 things
-    return response.json().then((json) => {
+    return response.json().then(json => {
       if (json.error) {
         // cook an error
         error = new Error(json.error.message);
