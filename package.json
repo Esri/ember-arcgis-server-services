@@ -1,6 +1,6 @@
 {
   "name": "ember-arcgis-server-services",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Ember services for dealing with ArcGIS Map, Feature and Image Servers",
   "directories": {
     "test": "tests"

@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 0.3.0
 ### Added
 * Add token if available for hosted services that belong to the user's organization
 * Add token if available for services using the secure server proxy
