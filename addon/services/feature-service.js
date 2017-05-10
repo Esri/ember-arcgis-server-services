@@ -2,28 +2,7 @@ import Ember from 'ember';
 import serviceMixin from '../mixins/ags-service-mixin';
 import layerMixin from '../mixins/layers';
 
-export default Ember.Service.extend(layerMixin, serviceMixin, {
-
-  // /**
-  //  * Parse url and return the type of the service
-  //  */
-  // getServiceType ( url ) {
-  //
-  // },
-  //
-  // getInfo (url) {
-  //   //  if single layer, return the layerInfo
-  //   //  if multilayer, return serviceInfo
-  // },
-
-  /**
-   * Search for records
-   */
-  query (url, options) {
-    let encoded = this.encodeForm(options);
-    url = url + '/query?f=json&' + encoded;
-    return this.request(url, {method: 'GET'});
-  },
+export default Ember.Service.extend(serviceMixin, layerMixin, {
 
   /**
    * Get a record by id
@@ -96,12 +75,5 @@ export default Ember.Service.extend(layerMixin, serviceMixin, {
       options.data.token = token;
     }
     return this.request(url, options);
-  },
-
-  /**
-   * Get the layer info
-   */
-  getLayerInfo (url) {
-    return this.request(url + '?f=json', {method: 'GET'});
   }
 });
