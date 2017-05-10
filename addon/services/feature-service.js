@@ -2,7 +2,7 @@ import Ember from 'ember';
 import serviceMixin from '../mixins/ags-service-mixin';
 import layerMixin from '../mixins/layers';
 
-export default Ember.Service.extend(layerMixin, serviceMixin, {
+export default Ember.Service.extend(serviceMixin, layerMixin, {
 
   /**
    * Get a record by id
@@ -75,12 +75,5 @@ export default Ember.Service.extend(layerMixin, serviceMixin, {
       options.data.token = token;
     }
     return this.request(url, options);
-  },
-
-  /**
-   * Get the layer info
-   */
-  getLayerInfo (url) {
-    return this.request(url + '?f=json', {method: 'GET'});
   }
 });
