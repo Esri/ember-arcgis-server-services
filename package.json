@@ -8,7 +8,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:each",
+    "test": "ember test --silent",
     "deploy": "ember github-pages:commit --environment=github --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\";"
   },
   "repository": {
