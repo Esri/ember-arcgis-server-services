@@ -1,4 +1,4 @@
-export default function shouldAddToken (url, portalId) {
+export default function shouldAddToken (url, portalId = '') {
   // if this is a hosted service that belongs to the user's organization
   // if this is a service with stored credentials
   const id = portalId.toLowerCase();
