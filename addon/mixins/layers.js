@@ -10,7 +10,7 @@ export default Ember.Mixin.create({
   /**
    * Get the layer info
    */
-  getLayerInfo (url, options = null) {
+  getLayerInfo (url, options = {}) {
     let layerUrl = url;
     if (options && options.layer) {
       const server = parseServerUrl(url);
