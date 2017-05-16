@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4.4
+### Fixed  
+- `getLayerInfo()` signature changed to require `options`. This caused regressions in down-stream applications. Made `options` optional.
+
 ## 0.4.3
 ### Fixed
 * add token even if portal id is mixed case
