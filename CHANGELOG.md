@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Changed
+* Add token on ArcGIS premium content servers
+
 ## 0.4.5
 - `getLayerInfo()` signature changed to require `options`. This caused regressions in down-stream applications. Made `options` default to `{}`.
 - added sanity tests to `feature-service`
