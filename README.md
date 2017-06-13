@@ -13,13 +13,8 @@ After adding this to your project, you will have a number of services available 
 This project is now using `ember-network/fetch` to enable fastboot compatibility.
 
 ### Installation
-Run the following in any ember application:
+To consume this library in any ember application:
 * `ember install ember-arcgis-server-services`
-
-or
-* `git clone` this repository
-* `npm install`
-* `bower install`
 
 ### Shared Methods
 All the services expose a set of shared helper methods:
@@ -59,7 +54,7 @@ Barring a catastrophic network or server failure, the ArcGIS Server API will alw
 
 ### Running
 
-* `ember serve`
+* `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Running Tests
