@@ -13,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArcGIS/ember-arcgis-server-services.git"
+    "url": "git+https://github.com/Esri/ember-arcgis-server-services.git"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 6"
   },
   "author": "Dave Bouwman <dbouwman@esri.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
     "ember-cli": "2.8.0",
@@ -64,7 +64,7 @@
   },
   "main": "index.js",
   "bugs": {
-    "url": "https://github.com/ArcGIS/ember-arcgis-server-services/issues"
+    "url": "https://github.com/Esri/ember-arcgis-server-services/issues"
   },
-  "homepage": "https://github.com/ArcGIS/ember-arcgis-server-services#readme"
+  "homepage": "https://github.com/Esri/ember-arcgis-server-services#readme"
 }

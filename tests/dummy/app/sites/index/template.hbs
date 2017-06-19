@@ -1,10 +1,11 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="form-group">
-      <div class="input-group">
-        {{input value=query class="form-control" placeholder="Domain"}}
-        <span class="input-group-btn"><button class="btn btn-default" {{action 'filter'}} ><span class="glyphicon glyphicon-search"></span></button></span>
-      </div><!-- /input-group -->
+      <form class="input-group" {{action "filter" on="submit"}}>
+        <!--form {{action "filter" on="submit"}}-->
+          {{input value=query class="form-control" placeholder="Domain"}}
+          <span class="input-group-btn"><button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></span>
+      </form><!-- /input-group -->
     </div>
     {{link-to 'New' 'sites.new' class='btn btn-default'}}
   </div>
