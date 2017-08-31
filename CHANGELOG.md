@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Changed
+* Pass token along when current domain matches server domain
+
 ## 0.4.6
 ### Changed
 * Add token on ArcGIS premium content servers
