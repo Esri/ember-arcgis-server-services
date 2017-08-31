@@ -21,7 +21,7 @@ export function hostsMatch (currentHost, requestedUrl) {
 
 function stripToTopDomain (url) {
   // pop off arcgis.com from server.foo.bar.arcgis.com/foobarbaz
-  url
+  return url
   .replace(/^https?:\/\//, '')
   .split(':')[0]
   .split('/')[0]
