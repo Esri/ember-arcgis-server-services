@@ -34,3 +34,7 @@ test('works with ports thrown in for fun on both', function (assert) {
 test('does not work with different hostnames', function (assert) {
   assert.notOk(subject.hostsMatch('https://server.foo.bar.com:6443/FeatureServer/0', 'http://server.foo.bar.portal.arcgis.com:7443/portal'));
 });
+
+test('does throw an exception with bad input', function (assert) {
+  assert.notOk(subject.hostsMatch());
+});
