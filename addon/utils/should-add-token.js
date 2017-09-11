@@ -1,9 +1,9 @@
-export default function shouldAddToken (url, portalId = '') {
+export default function shouldAddToken (url, portalId = '', portalHost) {
   // if this is a hosted service that belongs to the user's organization
   // if this is a service with stored credentials
   const id = portalId.toLowerCase();
-  if (location && location.host) {
-    return hostsMatch(location.host, url);
+  if (portalHost) {
+    return hostsMatch(portalHost, url);
   } else {
     return (
       !!url.toLowerCase().match('arcgis.com/arcgis/rest/services') ||

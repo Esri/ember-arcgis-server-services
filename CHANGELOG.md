@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Fixed
+* Use Portal Host instead of current domain to determine whether token should fly
+
 ## 0.4.8
 ### Fixed
 * Catch exception in token logic

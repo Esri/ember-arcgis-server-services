@@ -21,7 +21,7 @@ export default Ember.Mixin.create({
    * Make an arbitrary request to the server
    */
   request (url, options = {}) {
-    if (shouldAddToken(url, this.get('session.portal.id'))) {
+    if (shouldAddToken(url, this.get('session.portal.id'), this.get('session.portal.portalHostname'))) {
       options.token = this.get('session.token');
     }
     // options.token = this.get('session.token');
