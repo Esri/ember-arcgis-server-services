@@ -8,6 +8,8 @@ export default Ember.Mixin.create({
     this._super(); // ensure a good citizen in the super chain
   },
 
+  infoCache: new Map(),
+
   session: Ember.inject.service(),
 
   hostAppConfig: Ember.computed(function () {
@@ -21,12 +23,21 @@ export default Ember.Mixin.create({
    * Make an arbitrary request to the server
    */
   request (url, options = {}) {
-    if (shouldAddToken(url, this.get('session.portal.id'), this.get('session.portal.portalHostname'))) {
-      options.token = this.get('session.token');
-    }
-    // options.token = this.get('session.token');
+    debugger;
     options.method = options.method || 'GET';
-    return agoRequest(url, options);
+
+    const token = this.get('session.token');
+    if (!token) return agoRequest(url, options);
+
+    this.getAuthInfo(url)
+    .then(info => {
+      debugger;
+      if (info.owningSystemUrl === this.get('session.portal.portalHostname')) {
+        options.token = this.get('session.token');
+      }
+
+      return agoRequest(url, options);
+    });
   },
 
   /**
@@ -35,6 +46,19 @@ export default Ember.Mixin.create({
    */
   getServiceInfo (url, options) {
     return this.request(url + '?f=json', options);
+  },
+
+  /**
+   * Get authentication info
+   */
+  getAuthInfo (url) {
+    const authInfoUrl = url.match(/.+\/rest\/(?=services)/) + 'info?f=json';
+    const cached = this.get(`infoCache.${url}`);
+    if (cached) {
+      return Promise.resolve(cached);
+    } else {
+      return agoRequest(authInfoUrl);
+    }
   },
 
   /**
