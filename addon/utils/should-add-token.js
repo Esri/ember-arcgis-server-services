@@ -1,36 +1,30 @@
-export default function shouldAddToken (url, portalId = '', portalHost) {
-  // if this is a hosted service that belongs to the user's organization
-  // if this is a service with stored credentials
-  const id = portalId.toLowerCase();
-  if (portalHost) {
-    return hostsMatch(portalHost, url);
-  } else {
-    return (
-      !!url.toLowerCase().match('arcgis.com/arcgis/rest/services') ||
-      !!url.toLowerCase().match(`arcgis.com/${id}/arcgis/rest`) ||
-      /utility\w+\.arcgis\.com\/sharing\/servers\/\w{32}\/rest\/services\/Hosted/i.test(url)
-    );
+export default function shouldAddToken (url, serverInfo, portalInfo) {
+  let hostsDidMatch = false;
+  if (portalInfo.portalHostname) {
+    // make sure either the server and the portal are on the same domain
+    hostsDidMatch = hostsMatch(portalInfo.portalHostname, serverInfo.owningSystemUrl);
   }
+
+  // or it's in authorizedCrossOriginDomains
+  const domain = stripToDomain(url);
+  const isAuthorizedUrl = portalInfo.authorizedCrossOriginDomains.includes(domain);
+
+  return hostsDidMatch || isAuthorizedUrl;
 }
 
 export function hostsMatch (currentHost, requestedUrl) {
   try {
-    const portalTopTwo = stripToTopDomain(currentHost);
-    const requestedTopTwo = stripToTopDomain(requestedUrl);
+    const portalTopTwo = stripToDomain(currentHost);
+    const requestedTopTwo = stripToDomain(requestedUrl);
     return portalTopTwo === requestedTopTwo;
   } catch (e) {
     return false;
   }
 }
 
-function stripToTopDomain (url) {
-  // pop off arcgis.com from server.foo.bar.arcgis.com/foobarbaz
+function stripToDomain (url) {
   return url
   .replace(/^https?:\/\//, '')
   .split(':')[0]
-  .split('/')[0]
-  .split('')
-  .reverse()
-  .join('')
-  .match(/^[^.]+\.[^.]+/)[0];
+  .split('/')[0];
 }

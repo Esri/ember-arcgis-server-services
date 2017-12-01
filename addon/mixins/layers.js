@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { parseServerUrl } from '../utils/parse-url';
+import { parseServiceUrl } from '../utils/parse-url';
 import encodeForm from '../utils/encode-form';
 
 export default Ember.Mixin.create({
@@ -13,7 +13,7 @@ export default Ember.Mixin.create({
   getLayerInfo (url, options = {}) {
     let layerUrl = url;
     if (options && options.layer) {
-      const server = parseServerUrl(url);
+      const server = parseServiceUrl(url);
       layerUrl = `${server}/${options.layer}`;
     }
     return this.request(layerUrl + '?f=json', options);
@@ -23,7 +23,7 @@ export default Ember.Mixin.create({
    * Get info about all layers
    */
   getLayersInfo (url, options) {
-    const server = parseServerUrl(url);
+    const server = parseServiceUrl(url);
     const layersUrl = `${server}/layers?f=json`;
     return this.request(layersUrl, options)
       .then(layerInfo => {
