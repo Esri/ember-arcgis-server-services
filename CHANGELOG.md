@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+## Added
+- `ags-service-mixin::shouldAddToken` method
+- deprecated `ags-service-mixin::getServiceInfo` method in favor of `getLayerInfo`
+- `ags-service-mixin::getAuthInfo` method
+## Changed
+- utils/shouldAddToken now takes `url, serverInfo, portalInfo`
+
 ## 0.4.9
 ### Fixed
 * Use Portal Host instead of current domain to determine whether token should fly
