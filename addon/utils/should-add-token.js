@@ -1,16 +1,15 @@
 export default function shouldAddToken (url, serverInfo, portalInfo) {
-  let hostsDidMatch = false;
-  if (portalInfo.portalHostname) {
-    // make sure either the server and the portal are on the same domain
-    hostsDidMatch = hostsMatch(portalInfo.portalHostname, serverInfo.owningSystemUrl);
+  if (hostsMatch(portalInfo.portalHostname, serverInfo.owningSystemUrl)) {
+    // make sure the server and the portal are on the same domain
+    return true;
   }
 
   // or it's in authorizedCrossOriginDomains
   const domain = stripToDomain(url);
   const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
   const isAuthorizedUrl = authorizedCrossOriginDomains.includes(domain);
-
-  return hostsDidMatch || isAuthorizedUrl;
+  const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');
+  return isArcGisDomain && isAuthorizedUrl;
 }
 
 export function hostsMatch (currentHost, requestedUrl) {
