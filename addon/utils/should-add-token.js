@@ -1,30 +1,24 @@
 export default function shouldAddToken (url, serverInfo, portalInfo) {
-  if (hostsMatch(portalInfo.portalHostname, serverInfo.owningSystemUrl)) {
-    // make sure the server and the portal are on the same domain
-    return true;
-  }
-
-  // or it's in authorizedCrossOriginDomains
-  const domain = stripToDomain(url);
+  const serverDomain = stripToDomain(url);
+  const portalDomain = stripToDomain(portalInfo.portalHostname);
+  const owningDomain = stripToDomain(serverInfo.owningSystemUrl);
   const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
-  const isAuthorizedUrl = authorizedCrossOriginDomains.includes(domain);
+  const isAuthorizedUrl = authorizedCrossOriginDomains.includes(serverDomain);
   const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');
-  return isArcGisDomain && isAuthorizedUrl;
-}
 
-export function hostsMatch (currentHost, requestedUrl) {
-  try {
-    const portalTopTwo = stripToDomain(currentHost);
-    const requestedTopTwo = stripToDomain(requestedUrl);
-    return portalTopTwo === requestedTopTwo;
-  } catch (e) {
-    return false;
-  }
+  if (serverDomain === portalDomain === owningDomain) return true;
+  else if (portalDomain === owningDomain && isAuthorizedUrl) return true;
+  else if (portalDomain === owningDomain && isArcGisDomain) return true;
+  return false;
 }
 
 function stripToDomain (url) {
-  return url
-  .replace(/^https?:\/\//, '')
-  .split(':')[0]
-  .split('/')[0];
+  try {
+    return url
+    .replace(/^https?:\/\//, '')
+    .split(':')[0]
+    .split('/')[0];
+  } catch (e) {
+    return url;
+  }
 }
