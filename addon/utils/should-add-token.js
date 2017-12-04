@@ -1,6 +1,4 @@
 export default function shouldAddToken (url, serverInfo, portalInfo) {
-  const portalIdsMatch = serverInfo.owningTenant === portalInfo.id;
-
   let hostsDidMatch = false;
   if (portalInfo.portalHostname) {
     // make sure either the server and the portal are on the same domain
@@ -12,7 +10,7 @@ export default function shouldAddToken (url, serverInfo, portalInfo) {
   const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
   const isAuthorizedUrl = authorizedCrossOriginDomains.includes(domain);
 
-  return portalIdsMatch || hostsDidMatch || isAuthorizedUrl;
+  return hostsDidMatch || isAuthorizedUrl;
 }
 
 export function hostsMatch (currentHost, requestedUrl) {

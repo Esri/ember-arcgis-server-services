@@ -61,20 +61,6 @@ test('shouldAddToken returns false when token should not be added', function (as
   assert.notOk(subject.shouldAddToken(url, serverInfo, portalInfo));
 });
 
-test('shouldAddToken returns true when portal ids match', function (assert) {
-  const url = 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/ArcGIS/rest/services/integration_features_10001/FeatureServer/0/query?returnCountOnly=true&f=json&where=1%3D1&inSR=4326&geometry=-95.107,41.389,-95.025,41.4&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects';
-  const serverInfo = {
-    owningSystemUrl: 'http://www.arcgis.com',
-    owningTenant: '97KLIFOSt5CxbiRI'
-  };
-  const portalInfo = {
-    portalHostname: 'qaext.arcgis.com',
-    id: '97KLIFOSt5CxbiRI',
-    authorizedCrossOriginDomains: []
-  };
-  assert.ok(subject.shouldAddToken(url, serverInfo, portalInfo));
-});
-
 test('shouldAddToken returns true when hostnames match', function (assert) {
   const url = 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/ArcGIS/rest/services/integration_features_10001/FeatureServer/0/query?returnCountOnly=true&f=json&where=1%3D1&inSR=4326&geometry=-95.107,41.389,-95.025,41.4&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects';
   const serverInfo = {
