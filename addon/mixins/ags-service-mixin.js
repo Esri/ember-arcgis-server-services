@@ -32,7 +32,7 @@ export default Ember.Mixin.create({
     });
   },
 
-  shouldAddToken (url, portalInfo) {
+  shouldAddToken (url, portalInfo = {}) {
     const shouldAddTokenCache = this.get('shouldAddTokenCache');
     const key = parseServerUrl(url);
     const cachedValue = shouldAddTokenCache[key];

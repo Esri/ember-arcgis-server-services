@@ -3,11 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
-## Added
+### Fixed
+- Cannot read property 'portalHostname' of undefined error if session.portal is undefined
+
+## 0.5.0
+### Added
 - `ags-service-mixin::shouldAddToken` method
 - deprecated `ags-service-mixin::getServiceInfo` method in favor of `getLayerInfo`
 - `ags-service-mixin::getAuthInfo` method
-## Changed
+### Changed
 - utils/shouldAddToken now takes `url, serverInfo, portalInfo`
 
 ## 0.4.9
