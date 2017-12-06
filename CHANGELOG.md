@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 0.5.1
 ### Fixed
 - Cannot read property 'portalHostname' of undefined error if session.portal is undefined
 
