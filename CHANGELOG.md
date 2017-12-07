@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.2.0
+### Changed
+- `parseServiceUrl` and `parseServerUrl` now return the passed in url, stripped of any query string, if matches not found
+
 ## 1.0.1
 ### Fixed
 - Cannot read property 'portalHostname' of undefined error if session.portal is undefined

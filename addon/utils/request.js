@@ -31,8 +31,6 @@ export default function request (url, opts = {}) {
   opts.mode = 'cors';
   url = addToken(url, opts.token);
 
-  Ember.debug('Making request to ' + url);
-
   return fetch(url, opts).then(checkStatusAndParseJson);
   // TODO: try JSONP if GET request fails (to support older IE versions)
   // .catch((err) => {
@@ -47,7 +45,7 @@ export default function request (url, opts = {}) {
  */
 function checkStatusAndParseJson (response) {
   var error;
-  Ember.debug('Fetch request status: ' + response.status);
+  // Ember.debug('Fetch request status: ' + response.status);
   if (response.status >= 200 && response.status < 300) {
     // check if this is one of those groovy 200-but-a-400 things
     return response.json().then(json => {

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import agoRequest from '../utils/request';
 import { parseServiceUrl, parseServerUrl, parseType } from '../utils/parse-url';
-import shouldAddToken from '../utils/should-add-token';
+import shouldAddTokenUtil from '../utils/should-add-token';
 
 export default Ember.Mixin.create({
   init: function () {
@@ -31,10 +31,12 @@ export default Ember.Mixin.create({
       return agoRequest(url, options);
     });
   },
-
+  /**
+   * Given a url, determine if we should send along a token
+   */
   shouldAddToken (url, portalInfo = {}) {
     const shouldAddTokenCache = this.get('shouldAddTokenCache');
-    const key = parseServerUrl(url);
+    const key = parseServerUrl(url) || url;
     const cachedValue = shouldAddTokenCache[key];
 
     if (!Ember.isBlank(cachedValue)) {
@@ -42,11 +44,16 @@ export default Ember.Mixin.create({
     }
 
     return this.getAuthInfo(url)
-    .then(authInfo => {
-      const result = shouldAddToken(url, authInfo, portalInfo);
-      shouldAddTokenCache[key] = result;
-      return result;
-    });
+      .then(authInfo => {
+        const result = shouldAddTokenUtil(url, authInfo, portalInfo);
+        shouldAddTokenCache[key] = result;
+        return result;
+      })
+      .catch((err) => {
+        Ember.debug(`Error occured checking authInfo for ${url}. Message: ${err}. Will not send token for ${key}`);
+        shouldAddTokenCache[key] = false;
+        return false;
+      });
   },
 
   getServiceInfo (url, options) {
@@ -59,15 +66,27 @@ export default Ember.Mixin.create({
   },
 
   /**
-  * Get the base server info
+  * Get the base server info.
+  * Returns stuff like version, services and folders
    */
   getServerInfo (url, options) {
-    const service = parseServiceUrl(url);
+    const serviceUrl = parseServiceUrl(url);
+    let service = url;
+    if (serviceUrl) {
+      service = serviceUrl;
+    }
     return this.request(`${service}?f=json`, options);
   },
 
+  /**
+   * Get the authentication information from a server.
+   */
   getAuthInfo (url, options) {
-    const server = parseServerUrl(url);
+    let server = url;
+    const serverUrl = parseServerUrl(url);
+    if (serverUrl) {
+      server = serverUrl;
+    }
     // we want to never send a token for this one so we use agoRequest directly
     return agoRequest(`${server}/info?f=json`);
   }

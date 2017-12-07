@@ -13,8 +13,8 @@ export default Ember.Mixin.create({
   getLayerInfo (url, options = {}) {
     let layerUrl = url;
     if (options && options.layer) {
-      const server = parseServiceUrl(url);
-      layerUrl = `${server}/${options.layer}`;
+      const serviceUrl = parseServiceUrl(url);
+      layerUrl = `${serviceUrl}/${options.layer}`;
     }
     return this.request(layerUrl + '?f=json', options);
   },
@@ -23,8 +23,9 @@ export default Ember.Mixin.create({
    * Get info about all layers
    */
   getLayersInfo (url, options) {
-    const server = parseServiceUrl(url);
-    const layersUrl = `${server}/layers?f=json`;
+    const serviceUrl = parseServiceUrl(url);
+    let layersUrl = `${serviceUrl}/layers?f=json`;
+    // make the request
     return this.request(layersUrl, options)
       .then(layerInfo => {
         const merged = [...layerInfo.layers, ...layerInfo.tables];

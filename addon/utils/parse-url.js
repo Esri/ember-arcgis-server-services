@@ -1,6 +1,4 @@
 import Ember from 'ember';
-const serviceRegex = new RegExp(/.+(?:map|feature|image)server/i);
-const serverRegex = new RegExp(/(arcgis\/rest).+/i);
 
 /**
  * Parse up the url so we have a better idea what we are dealing with
@@ -52,11 +50,42 @@ export default function parseUrl (url) {
   return parsed;
 }
 
+/**
+ * Match the "service" part of the url
+ */
+const serviceRegex = new RegExp(/.+(?:map|feature|image)server/i);
+/**
+ * Return the service url. If not matched, returns what was passed in
+ */
 export function parseServiceUrl (url) {
   const match = url.match(serviceRegex);
-  if (match) return match[0];
+  if (match) {
+    return match[0];
+  } else {
+    return stripQuerystring(url);
+  }
+}
+/**
+ * Match the arcGIS server "root"
+ * which always ends with /rest
+ */
+const serverRegex = new RegExp(/(\/rest).+/i);
+/**
+ * Return the server url, if not matched, returns null
+ */
+export function parseServerUrl (url) {
+  const match = url.match(serverRegex);
+  if (match) {
+    return url.replace(serverRegex, '$1');
+  } else {
+    return stripQuerystring(url);
+  }
 }
 
-export function parseServerUrl (url) {
-  return url.replace(serverRegex, '$1');
+function stripQuerystring (url) {
+  let stripped = url;
+  if (url.indexOf('?') > -1) {
+    stripped = url.split('?')[0];
+  }
+  return stripped;
 }
