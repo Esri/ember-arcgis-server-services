@@ -1,6 +1,4 @@
 import Ember from 'ember';
-const serviceRegex = new RegExp(/.+(?:map|feature|image)server/i);
-const serverRegex = new RegExp(/(arcgis\/rest).+/i);
 
 /**
  * Parse up the url so we have a better idea what we are dealing with
@@ -52,11 +50,38 @@ export default function parseUrl (url) {
   return parsed;
 }
 
-export function parseServiceUrl (url) {
+/**
+ * Match the "service" part of the url
+ */
+const serviceRegex = new RegExp(/.+(?:map|feature|image)server/i);
+/**
+ * Return the service url. If not matched, returns null
+ */
+export function tryParseServiceUrl (url) {
   const match = url.match(serviceRegex);
   if (match) return match[0];
 }
-
+// DEPRECATED
+export function parseServiceUrl (url) {
+  Ember.deprecate('use tryParseServiceUrl(url).', false, {id: 'tryParseServiceUrlDeprecation', until: '10.0.0'});
+  return tryParseServiceUrl(url);
+}
+/**
+ * Match the arcGIS server "root"
+ * which always ends with /rest
+ */
+const serverRegex = new RegExp(/(\/rest).+/i);
+/**
+ * Return the server url, if not matched, returns null
+ */
+export function tryParseServerUrl (url) {
+  const match = url.match(serverRegex);
+  if (match) {
+    return url.replace(serverRegex, '$1');
+  }
+}
+// DEPRECATED
 export function parseServerUrl (url) {
-  return url.replace(serverRegex, '$1');
+  Ember.deprecate('use tryParseServerUrl(url).', false, {id: 'tryParseServerUrlDeprecation', until: '10.0.0'});
+  return tryParseServerUrl(url);
 }

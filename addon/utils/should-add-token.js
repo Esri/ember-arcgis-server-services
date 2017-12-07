@@ -1,15 +1,31 @@
+import Ember from 'ember';
+/**
+ * Logic to determine when we should attach a token to a ArcGIS Server / Hosted Service call
+ */
 export default function shouldAddToken (url, serverInfo, portalInfo) {
-  const serverDomain = stripToDomain(url);
-  const portalDomain = stripToDomain(portalInfo.portalHostname);
-  const owningDomain = stripToDomain(serverInfo.owningSystemUrl);
-  const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
-  const isAuthorizedUrl = authorizedCrossOriginDomains.includes(serverDomain);
-  const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');
+  // default to not sending tokens
+  let shouldSendToken = false;
+  // check if the server even accepts tokens
+  const acceptsTokens = Ember.getWithDefault(serverInfo, 'authInfo.isTokenBasedSecurity', false);
+  if (acceptsTokens) {
+    const serverDomain = stripToDomain(url);
+    const portalDomain = stripToDomain(portalInfo.portalHostname);
+    const owningDomain = stripToDomain(serverInfo.owningSystemUrl);
+    const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
+    const isAuthorizedUrl = authorizedCrossOriginDomains.includes(serverDomain);
+    const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');
 
-  if (serverDomain === portalDomain === owningDomain) return true;
-  else if (portalDomain === owningDomain && isAuthorizedUrl) return true;
-  else if (portalDomain === owningDomain && isArcGisDomain) return true;
-  return false;
+    // if all three are the same domain... send it
+    if (serverDomain === portalDomain === owningDomain) {
+      shouldSendToken = true;
+    } else if (portalDomain === owningDomain && isAuthorizedUrl) {
+      shouldSendToken = true;
+    } else if (portalDomain === owningDomain && isArcGisDomain) {
+      shouldSendToken = true;
+    }
+  }
+
+  return shouldSendToken;
 }
 
 function stripToDomain (url) {
