@@ -12,7 +12,7 @@ export default function shouldAddToken (url, serverInfo, portalInfo) {
     const portalDomain = stripToDomain(portalInfo.portalHostname);
     const owningDomain = stripToDomain(serverInfo.owningSystemUrl);
     const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
-    const isAuthorizedUrl = authorizedCrossOriginDomains.includes(serverDomain);
+    const isAuthorizedUrl = authorizedCrossOriginDomains.indexOf(serverDomain) > -1;
     const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');
 
     // if all three are the same domain... send it
