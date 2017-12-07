@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import agoRequest from '../utils/request';
-import { tryParseServiceUrl, tryParseServerUrl, parseType } from '../utils/parse-url';
+import { parseServiceUrl, parseServerUrl, parseType } from '../utils/parse-url';
 import shouldAddTokenUtil from '../utils/should-add-token';
 
 export default Ember.Mixin.create({
@@ -36,7 +36,7 @@ export default Ember.Mixin.create({
    */
   shouldAddToken (url, portalInfo = {}) {
     const shouldAddTokenCache = this.get('shouldAddTokenCache');
-    const key = tryParseServerUrl(url) || url;
+    const key = parseServerUrl(url) || url;
     const cachedValue = shouldAddTokenCache[key];
 
     if (!Ember.isBlank(cachedValue)) {
@@ -66,10 +66,11 @@ export default Ember.Mixin.create({
   },
 
   /**
-  * Get the base server info
+  * Get the base server info.
+  * Returns stuff like version, services and folders
    */
   getServerInfo (url, options) {
-    const serviceUrl = tryParseServiceUrl(url);
+    const serviceUrl = parseServiceUrl(url);
     let service = url;
     if (serviceUrl) {
       service = serviceUrl;
@@ -77,9 +78,12 @@ export default Ember.Mixin.create({
     return this.request(`${service}?f=json`, options);
   },
 
+  /**
+   * Get the authentication information from a server.
+   */
   getAuthInfo (url, options) {
     let server = url;
-    const serverUrl = tryParseServerUrl(url);
+    const serverUrl = parseServerUrl(url);
     if (serverUrl) {
       server = serverUrl;
     }

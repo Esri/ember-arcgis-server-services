@@ -55,16 +55,15 @@ export default function parseUrl (url) {
  */
 const serviceRegex = new RegExp(/.+(?:map|feature|image)server/i);
 /**
- * Return the service url. If not matched, returns null
+ * Return the service url. If not matched, returns what was passed in
  */
-export function tryParseServiceUrl (url) {
-  const match = url.match(serviceRegex);
-  if (match) return match[0];
-}
-// DEPRECATED
 export function parseServiceUrl (url) {
-  Ember.deprecate('use tryParseServiceUrl(url).', false, {id: 'tryParseServiceUrlDeprecation', until: '10.0.0'});
-  return tryParseServiceUrl(url);
+  const match = url.match(serviceRegex);
+  if (match) {
+    return match[0];
+  } else {
+    return stripQuerystring(url);
+  }
 }
 /**
  * Match the arcGIS server "root"
@@ -74,14 +73,19 @@ const serverRegex = new RegExp(/(\/rest).+/i);
 /**
  * Return the server url, if not matched, returns null
  */
-export function tryParseServerUrl (url) {
+export function parseServerUrl (url) {
   const match = url.match(serverRegex);
   if (match) {
     return url.replace(serverRegex, '$1');
+  } else {
+    return stripQuerystring(url);
   }
 }
-// DEPRECATED
-export function parseServerUrl (url) {
-  Ember.deprecate('use tryParseServerUrl(url).', false, {id: 'tryParseServerUrlDeprecation', until: '10.0.0'});
-  return tryParseServerUrl(url);
+
+function stripQuerystring (url) {
+  let stripped = url;
+  if (url.indexOf('?') > -1) {
+    stripped = url.split('?')[0];
+  }
+  return stripped;
 }

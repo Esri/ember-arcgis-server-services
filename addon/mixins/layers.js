@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { tryParseServiceUrl } from '../utils/parse-url';
+import { parseServiceUrl } from '../utils/parse-url';
 import encodeForm from '../utils/encode-form';
 
 export default Ember.Mixin.create({
@@ -13,12 +13,8 @@ export default Ember.Mixin.create({
   getLayerInfo (url, options = {}) {
     let layerUrl = url;
     if (options && options.layer) {
-      const serviceUrl = tryParseServiceUrl(url);
-      if (serviceUrl) {
-        layerUrl = `${serviceUrl}/${options.layer}`;
-      } else {
-        Ember.debugger(`getLayerInfo could not extract the serviceUrl from ${url}. Using the url as passed and not appending layer ${options.layer}.`);
-      }
+      const serviceUrl = parseServiceUrl(url);
+      layerUrl = `${serviceUrl}/${options.layer}`;
     }
     return this.request(layerUrl + '?f=json', options);
   },
@@ -27,13 +23,8 @@ export default Ember.Mixin.create({
    * Get info about all layers
    */
   getLayersInfo (url, options) {
-    let layersUrl = url;
-    const serviceUrl = tryParseServiceUrl(url);
-    if (serviceUrl) {
-      layersUrl = `${serviceUrl}/layers?f=json`;
-    } else {
-      Ember.debugger(`getLayersInfo could not extract the serviceUrl from ${url}. Using the url as passed in.`);
-    }
+    const serviceUrl = parseServiceUrl(url);
+    let layersUrl = `${serviceUrl}/layers?f=json`;
     // make the request
     return this.request(layersUrl, options)
       .then(layerInfo => {
