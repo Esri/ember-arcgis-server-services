@@ -34,7 +34,14 @@ export default Ember.Mixin.create({
   /**
    * Given a url, determine if we should send along a token
    */
-  shouldAddToken (url, portalInfo = {}) {
+  shouldAddToken (url, portalInfo) {
+    if (!portalInfo) {
+      // if they are not logged in, we definitely do not want to add a token because we don't have ont
+      // so we can save the xhr below
+      // and we do not want to cache this value because the user might log in
+      return Ember.RSVP.resolve(false);
+    }
+
     const shouldAddTokenCache = this.get('shouldAddTokenCache');
     const key = parseServerUrl(url) || url;
     const cachedValue = shouldAddTokenCache[key];
