@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Changed
+- ags-service-mixin::shouldAddToken returns false without caching if portalInfo is not provided
+
 ## 1.1.0
 ### Changed
 - `parseServiceUrl` and `parseServerUrl` now return the passed in url, stripped of any query string, if matches not found
