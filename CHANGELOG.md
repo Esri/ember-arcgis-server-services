@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Changed
+- Set `isDevelopingAddon` to `false` so addon is not linted in comsuming projects.
+
 ## 1.2.0
 ### Changed
 - ags-service-mixin::shouldAddToken returns false without caching if portalInfo is not provided
