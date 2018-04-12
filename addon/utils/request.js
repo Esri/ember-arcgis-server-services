@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import fetch from 'ember-network/fetch';
+import fetch from 'fetch';
 import addToken from './add-token';
 import encodeForm from './encode-form';
 
