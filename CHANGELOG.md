@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Changed
+- replace ember-network w/ ember-fetch
+
 ## 1.2.1
 ### Changed
 - Set `isDevelopingAddon` to `false` so addon is not linted in comsuming projects.
