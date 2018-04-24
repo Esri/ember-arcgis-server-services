@@ -1,18 +1,29 @@
-import Ember from 'ember';
+import { deprecate } from '@ember/application/deprecations';
+import { debug } from '@ember/debug';
+import { resolve } from 'rsvp';
+import { isBlank } from '@ember/utils';
+import { getOwner } from '@ember/application';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin';
 import agoRequest from '../utils/request';
-import { parseServiceUrl, parseServerUrl, parseType } from '../utils/parse-url';
+import {
+  parseServiceUrl,
+  parseServerUrl,
+  parseType
+} from '../utils/parse-url';
 import shouldAddTokenUtil from '../utils/should-add-token';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   init: function () {
     this._super(); // ensure a good citizen in the super chain
     this.set('shouldAddTokenCache', {});
   },
 
-  session: Ember.inject.service(),
+  session: service(),
 
-  hostAppConfig: Ember.computed(function () {
-    return Ember.getOwner(this).resolveRegistration('config:environment');
+  hostAppConfig: computed(function () {
+    return getOwner(this).resolveRegistration('config:environment');
   }),
 
   // TODO consider removing this at a major version
@@ -46,8 +57,8 @@ export default Ember.Mixin.create({
     const key = parseServerUrl(url) || url;
     const cachedValue = shouldAddTokenCache[key];
 
-    if (!Ember.isBlank(cachedValue)) {
-      return Ember.RSVP.resolve(cachedValue);
+    if (!isBlank(cachedValue)) {
+      return resolve(cachedValue);
     }
 
     return this.getAuthInfo(url)
@@ -57,14 +68,14 @@ export default Ember.Mixin.create({
         return result;
       })
       .catch((err) => {
-        Ember.debug(`Error occured checking authInfo for ${url}. Message: ${err}. Will not send token for ${key}`);
+        debug(`Error occured checking authInfo for ${url}. Message: ${err}. Will not send token for ${key}`);
         shouldAddTokenCache[key] = false;
         return false;
       });
   },
 
   getServiceInfo (url, options) {
-    Ember.deprecate('use .getLayerInfo(url, options).', false, {id: 'getServiceInfoDeprecation', until: '10.0.0'});
+    deprecate('use .getLayerInfo(url, options).', false, {id: 'getServiceInfoDeprecation', until: '10.0.0'});
     return this.getLayerInfo(url, options);
   },
 
@@ -95,7 +106,7 @@ export default Ember.Mixin.create({
       server = serverUrl;
     }
     // we want to never send a token for this one so we use agoRequest directly
-    return agoRequest(`${server}/info?f=json`);
+    return agoRequest(`${server}/info?f=json`, options);
   }
 
 });

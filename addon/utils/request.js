@@ -1,6 +1,6 @@
-import Ember from 'ember';
 import fetch from 'fetch';
 import addToken from './add-token';
+import { debug } from '@ember/debug';
 import encodeForm from './encode-form';
 
 /**
@@ -32,12 +32,6 @@ export default function request (url, opts = {}) {
   url = addToken(url, opts.token);
 
   return fetch(url, opts).then(checkStatusAndParseJson);
-  // TODO: try JSONP if GET request fails (to support older IE versions)
-  // .catch((err) => {
-  //   if (err.message === 'Network request failed' && opts.method === 'GET') {
-  //     // need to install ember-ajax or fetch-jsonp to try a JSONP request
-  //   }
-  // });
 }
 
 /**

@@ -1,15 +1,17 @@
-import Ember from 'ember';
+import { debug } from '@ember/debug';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import ENV from '../config/environment';
-export default Ember.Route.extend({
-  session: Ember.inject.service('session'),
+export default Route.extend({
+  session: service('session'),
 
   beforeModel () {
     return this.get('session').fetch()
       .then(() => {
-        Ember.debug('User has been automatically logged in... ');
+        debug('User has been automatically logged in... ');
       })
       .catch(() => {
-        Ember.debug('No cookie was found, user is anonymous... ');
+        debug('No cookie was found, user is anonymous... ');
       });
   },
   model () {

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { getWithDefault } from '@ember/object';
 /**
  * Logic to determine when we should attach a token to a ArcGIS Server / Hosted Service call
  */
@@ -6,7 +6,7 @@ export default function shouldAddToken (url, serverInfo, portalInfo) {
   // default to not sending tokens
   let shouldSendToken = false;
   // check if the server even accepts tokens
-  const acceptsTokens = Ember.getWithDefault(serverInfo, 'authInfo.isTokenBasedSecurity', false);
+  const acceptsTokens = getWithDefault(serverInfo, 'authInfo.isTokenBasedSecurity', false);
   if (acceptsTokens) {
     const serverDomain = stripToDomain(url);
     const portalDomain = stripToDomain(portalInfo.portalHostname);
