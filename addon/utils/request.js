@@ -54,7 +54,7 @@ function checkStatusAndParseJson (response) {
         error = new Error(json.error.message);
         error.code = json.error.code || 404;
         error.response = response;
-        Ember.debug('Error in response:  ' + json.error.message);
+        debug('Error in response:  ' + json.error.message);
         throw error;
       } else {
         return json;
