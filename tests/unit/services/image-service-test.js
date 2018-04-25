@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { resolve } from 'rsvp';
+import Service from '@ember/service';
 import { moduleFor } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
 
@@ -6,8 +7,9 @@ moduleFor(
   'service:image-service',
   'Unit | Service | image service',
   {
-    // Specify the other units that are required for this test.
-    // needs: ['service:foo']
+    beforeEach() {
+      this.register('service:session', Service.extend({}));
+    }
   }
 );
 
@@ -19,8 +21,8 @@ test('it exists', function (assert) {
 
 test('getServerInfo takes url', function (assert) {
   let service = this.subject();
-  this.stub(service, 'request', function (url, options) {
-    return Ember.RSVP.resolve({ prop: 'value' });
+  this.stub(service, 'request').callsFake(function (/*url, options */) {
+    return resolve({ prop: 'value' });
   });
   return service.getServerInfo('http://landscape4qa.arcgis.com/arcgis/rest/services/USA_Soils_Hydric_Classification/ImageServer').then(response => {
     assert.equal(response.prop, 'value');

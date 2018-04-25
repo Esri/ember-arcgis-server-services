@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 import { parseServiceUrl } from '../utils/parse-url';
 import encodeForm from '../utils/encode-form';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   init: function () {
     this._super(); // ensure a good citizen in the super chain
   },

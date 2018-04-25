@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Service from '@ember/service';
 import serviceMixin from '../mixins/ags-service-mixin';
 import layerMixin from '../mixins/layers';
 
-export default Ember.Service.extend(serviceMixin, layerMixin, {
+export default Service.extend(serviceMixin, layerMixin, {
 });

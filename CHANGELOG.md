@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Changed
 - replace ember-network w/ ember-fetch
+- upgraded many dependencies, as well as Ember 2.18.0. External API's are the same
+- unit tests now passing
 
 ## 1.2.1
 ### Changed

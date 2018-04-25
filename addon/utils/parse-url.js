@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { debug } from '@ember/debug';
+import { dasherize } from '@ember/string';
 
 /**
  * Parse up the url so we have a better idea what we are dealing with
@@ -30,10 +31,10 @@ export default function parseUrl (url) {
   let wktypes = ['MapServer', 'FeatureServer', 'ImageServer', 'WMSServer'];
   wktypes.forEach((type) => {
     if (url.toLowerCase().indexOf(type.toLowerCase()) > -1) {
-      parsed.serviceType = Ember.String.dasherize(type);
+      parsed.serviceType = dasherize(type);
     }
   });
-  Ember.debug('Service Type: ' + parsed.serviceType);
+  debug('Service Type: ' + parsed.serviceType);
 
   // if it's hosted, pull out the orgid
   if (url.indexOf('arcgis.com') > -1) {

@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 import ENV from '../../config/environment';
-export default Ember.Controller.extend({
-  session: Ember.inject.service('session'),
-  featureService: Ember.inject.service('feature-service'),
+export default Controller.extend({
+  session: service('session'),
+  featureService: service('feature-service'),
   status: 'Unsaved.',
 
   domain: 'foobar.com',
