@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - shouldAddToken appends token if server, portal, and owning system are same host
 - fixed lint error so that we can run tests in travis
-- copy travis config from ember-arcgis-portal-services
+- copy travis/testem config from ember-arcgis-portal-services
 
 ## 1.3.0
 ### Changed
