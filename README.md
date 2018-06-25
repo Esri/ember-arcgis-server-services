@@ -1,5 +1,15 @@
 # ember-arcgis-server-services
 
+[![npm version][npm-img]][npm-url]
+[![build status][travis-img]][travis-url]
+[![apache licensed](https://img.shields.io/badge/license-Apache-green.svg?style=flat-square)](https://raw.githubusercontent.com/Esri/ember-arcgis-server-services/master/LICENSE)
+
+[npm-img]: https://img.shields.io/npm/v/ember-arcgis-server-services.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/ember-arcgis-server-services
+[travis-img]: https://img.shields.io/travis/Esri/ember-arcgis-server-services/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/Esri/ember-arcgis-server-services
+
+
 Ember Services for working with ArcGIS Server Services.
 
 **Note**  This is still a very nascent project, and things will change.
