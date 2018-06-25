@@ -50,7 +50,7 @@ export default Mixin.create({
       // if they are not logged in, we definitely do not want to add a token because we don't have ont
       // so we can save the xhr below
       // and we do not want to cache this value because the user might log in
-      return Ember.RSVP.resolve(false);
+      return resolve(false);
     }
 
     const shouldAddTokenCache = this.get('shouldAddTokenCache');

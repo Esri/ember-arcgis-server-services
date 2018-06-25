@@ -16,7 +16,7 @@ export default function shouldAddToken (url, serverInfo, portalInfo) {
     const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');
 
     // if all three are the same domain... send it
-    if (serverDomain === portalDomain === owningDomain) {
+    if ((serverDomain === portalDomain) && (portalDomain === owningDomain)) {
       shouldSendToken = true;
     } else if (portalDomain === owningDomain && isAuthorizedUrl) {
       shouldSendToken = true;

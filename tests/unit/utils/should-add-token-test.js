@@ -18,6 +18,27 @@ test('shouldAddToken returns false when server does not accept tokens', function
   assert.notOk(shouldAddToken(url, serverInfo, portalInfo));
 });
 
+test('shouldAddToken returns true when portal is owningSystemUrl', function (assert) {
+  const url = `https://pheede2-win10vm.esri.com/server/rest/services/Hosted/Emergency_Calls/FeatureServer/0/query?f=json&outFields=*&outStatistics=%5B%7B%22onStatisticField%22%3A%22priority%22%2C%22outStatisticFieldName%22%3A%22priority_count%22%2C%22statisticType';%22%3A%22count%22%7D%5D&returnGeometry=false&where=1%3D1`;
+
+  const serverInfo = {
+    "currentVersion": 10.61,
+    "fullVersion": "10.6.1",
+    "soapUrl": "https://pheede2-win10vm.esri.com/server/services",
+    "secureSoapUrl": null,
+    "owningSystemUrl": "https://pheede2-win10vm.esri.com/portal",
+    "authInfo": {
+      "isTokenBasedSecurity": true,
+      "tokenServicesUrl": "https://pheede2-win10vm.esri.com/portal/sharing/rest/generateToken"
+    }
+  };
+  const portalInfo = {
+    "portalHostname": "pheede2-win10vm.esri.com/portal",
+    authorizedCrossOriginDomains: []
+  };
+  assert.ok(shouldAddToken(url, serverInfo, portalInfo));
+});
+
 test('shouldAddToken returns false when portal is not owningSystemUrl', function (assert) {
   const url = 'https://services2.arcgis.com/zNjnZafDYCAJAbN0/arcgis/rest/services/Street_ROW_Trees/FeatureServer/0/query?returnCountOnly=true&f=json&where=1%3D1&inSR=4326&geometry=-118.132,34.16,-118.122,34.162&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects';
   const serverInfo = {

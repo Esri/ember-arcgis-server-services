@@ -3,10 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+### Fixed
+- shouldAddToken appends token if server, portal, and owning system are same host
+- fixed lint error so that we can run tests in travis
+- copy travis/testem config from ember-arcgis-portal-services
+
+## 1.3.0
 ### Changed
-- replace ember-network w/ ember-fetch
 - upgraded many dependencies, as well as Ember 2.18.0. External API's are the same
 - unit tests now passing
+
+## 1.2.2
+### Changed
+- replace ember-network w/ ember-fetch
 
 ## 1.2.1
 ### Changed
