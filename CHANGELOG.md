@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Fixed
 - shouldAddToken appends token if server, portal, and owning system are same host
+- fixed lint error so that we can run tests in travis
 
 ## 1.3.0
 ### Changed
