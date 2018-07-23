@@ -13,6 +13,14 @@ export default Service.extend(serviceMixin, layerMixin, {
   },
 
   /**
+   * Get attachments for a record by id
+   */
+  getAttachmentsById (url, id) {
+    url = `${url}/${id}/attachments?f=json`;
+    return this.request(url, {method: 'GET'});
+  },
+
+  /**
    * Update a single feature
    */
   updateFeature (url, feature, token) {
@@ -27,7 +35,18 @@ export default Service.extend(serviceMixin, layerMixin, {
   },
 
   /**
-   * Add an single feature
+   * Update an attachment,
+   * data.attachment FILE
+   * data.attachmentId
+   * data.keywords
+   */
+  updateAttachment (url, data, token) {
+    url = url + '/updateAttachment?f=json';
+    return this.attachmentsRequest(url, data, token);
+  },
+
+  /**
+   * Add a single feature
    */
   addFeature (url, feature, token) {
     // wrap into an array...
@@ -44,6 +63,16 @@ export default Service.extend(serviceMixin, layerMixin, {
   },
 
   /**
+   * Add an attachment
+   * data.attachment FILE
+   * data.keywords
+   */
+  addAttachment (url, data, token) {
+    url = url + '/addAttachment?f=json';
+    return this.attachmentsRequest(url, data, token);
+  },
+
+  /**
    * Delete a single feature
    */
   deleteFeature (url, objectId, token) {
@@ -55,6 +84,16 @@ export default Service.extend(serviceMixin, layerMixin, {
    */
   deleteFeatures (url, objectIds, token) {
     return this.applyEdits(url, [], [], objectIds, token);
+  },
+
+  /**
+   * Delete attachments
+   * data.attachmentIds ARRAY
+   * data.keywords
+   */
+  deleteAttachments (url, data, token) {
+    url = url + '/deleteAttachments?f=json';
+    return this.attachmentsRequest(url, data, token);
   },
 
   /**
@@ -73,6 +112,21 @@ export default Service.extend(serviceMixin, layerMixin, {
     };
     if (token) {
       options.data.token = token;
+    }
+    return this.request(url, options);
+  },
+
+  attachmentsRequest (url, data, token) {
+    let options = {
+      method: 'POST',
+      mimeType: 'multipart/form-data',
+      body: new FormData()
+    }
+    Object.keys(data).forEach(key => {
+      options.body.append(key, data[key]);
+    });
+    if (token) {
+      options.token = token;
     }
     return this.request(url, options);
   }
