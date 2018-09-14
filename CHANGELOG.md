@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+### Changed
+- configure eslint to prohibit use of jQuery
 
 ## 1.4.1
 ### Changed
