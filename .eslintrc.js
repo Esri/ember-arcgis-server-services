@@ -16,6 +16,11 @@ module.exports = {
   },
   rules: {
     "ember/no-jquery": 2,
+    // don't allow use of the global fetch
+    "no-restricted-globals": [2, {
+      name: "fetch",
+      message: "Use ember-fetch (import fetch from 'fetch') instead of the global."
+    }]
   },
   overrides: [
     // node files

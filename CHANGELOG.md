@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Changed
 - configure eslint to prohibit use of jQuery
+- configure eslint to prohibit use of global fetch
 
 ## 1.4.1
 ### Changed
