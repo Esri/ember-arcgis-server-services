@@ -27,16 +27,16 @@
     "ember-cli-babel": "^6.16.0"
   },
   "devDependencies": {
+    "@ember/jquery": "^0.5.1",
     "@ember/optional-features": "^0.6.3",
     "broccoli-asset-rev": "^2.7.0",
-    "ember-cli": "~3.4.3",
+    "ember-cli": "~3.5.0",
     "ember-cli-active-link-wrapper": "0.5.0",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-eslint": "^4.2.3",
     "ember-cli-htmlbars": "^3.0.0",
     "ember-cli-htmlbars-inline-precompile": "^1.0.3",
     "ember-cli-inject-live-reload": "^1.8.2",
-    "ember-cli-qunit": "^4.3.2",
     "ember-cli-release": "^0.2.9",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-surge": "1.2.0",
@@ -47,10 +47,11 @@
     "ember-fetch": "^3.4.5",
     "ember-load-initializers": "^1.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-qunit": "^3.4.1",
     "ember-resolver": "^5.0.1",
     "ember-sinon": "^1.0.1",
     "ember-sinon-qunit": "^2.0.0",
-    "ember-source": "~3.4.0",
+    "ember-source": "~3.5.0",
     "ember-source-channel-url": "^1.1.0",
     "ember-try": "^1.0.0",
     "eslint-config-semistandard": "~7.0.0",
@@ -61,9 +62,8 @@
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-standard": "^2.0.0",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.7.1",
-    "torii-provider-arcgis": "^2.0.0",
-    "@ember/jquery": "^0.5.1"
+    "qunit-dom": "^0.8.0",
+    "torii-provider-arcgis": "^2.0.0"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
