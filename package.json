@@ -27,7 +27,6 @@
     "ember-cli-babel": "^6.16.0"
   },
   "devDependencies": {
-    "@ember/jquery": "^0.5.1",
     "@ember/optional-features": "^0.6.3",
     "broccoli-asset-rev": "^2.7.0",
     "ember-cli": "~3.5.0",
@@ -63,7 +62,8 @@
     "eslint-plugin-standard": "^2.0.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
-    "torii-provider-arcgis": "^2.0.0"
+    "torii-provider-arcgis": "^2.0.0",
+    "@ember/jquery": "^0.5.1"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
