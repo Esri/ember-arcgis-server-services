@@ -2,45 +2,51 @@
   <div class="col-sm-12">
     <div class="form-group">
       <form class="input-group" {{action "filter" on="submit"}}>
-        <!--form {{action "filter" on="submit"}}-->
-          {{input value=query class="form-control" placeholder="Domain"}}
-          <span class="input-group-btn"><button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></span>
-      </form><!-- /input-group -->
+        {{!--form {{action "filter" on="submit"}}--}}
+        {{input value=query class="form-control" placeholder="Domain"}}
+        <span class="input-group-btn"><button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></span>
+      </form>{{!-- /input-group --}}
     </div>
-    {{link-to 'New' 'sites.new' class='btn btn-default'}}
+    {{link-to "New" "sites.new" class="btn btn-default"}}
   </div>
   <div class="col-sm-12">
-  {{#if totalCount}}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <td>Site</td>
-          <td>Domain</td>
-          <td>Site Id</td>
-          <td>Owner</td>
-          <td>Client Key</td>
-          <td>Actions</td>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each model.features as |row|}}
-        <tr>
-          <td>{{row.attributes.siteTitle}}</td>
-          <td>{{row.attributes.domain}}</td>
-          <td>{{row.attributes.siteId}}</td>
-          <td>{{row.attributes.Creator}}</td>
-          <td>{{row.attributes.clientKey}}</td>
-          <td>{{row-edit-controls model=row currentUser=currentUser onDelete=(action 'delete')}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  {{else}}
-    <div class="alert alert-info" role="alert">
-      <h4>No Results Found.</h4>
-      <p>Please try another query.</p>
-    </div>
-  {{/if}}
+    {{#if totalCount}}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td>Site</td>
+            <td>Domain</td>
+            <td>Site Id</td>
+            <td>Owner</td>
+            <td>Client Key</td>
+            <td>Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each model.features as |row|}}
+            <tr>
+              <td>{{row.attributes.siteTitle}}</td>
+              <td>{{row.attributes.domain}}</td>
+              <td>{{row.attributes.siteId}}</td>
+              <td>{{row.attributes.Creator}}</td>
+              <td>{{row.attributes.clientKey}}</td>
+              <td>
+                {{row-edit-controls
+                  model=row
+                  currentUser=currentUser
+                  onDelete=(action "delete")
+                }}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <div class="alert alert-info" role="alert">
+        <h4>No Results Found.</h4>
+        <p>Please try another query.</p>
+      </div>
+    {{/if}}
   </div>
 </div>
 currentUser: {{currentUser}}
