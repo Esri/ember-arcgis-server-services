@@ -1,14 +1,18 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 import Service from '@ember/service';
-moduleFor('service:map-service', 'Unit | Service | map service', {
-  // Specify the other units that are required for this test.
-  beforeEach() {
-    this.register('service:session', Service.extend({}));
-  }
-});
 
-// Replace this with your real tests.
-test('it exists', function (assert) {
-  let service = this.subject();
-  assert.ok(service);
+module('Unit | Service | map service', function(hooks) {
+  setupTest(hooks);
+
+  // Specify the other units that are required for this test.
+  hooks.beforeEach(function() {
+    this.owner.register('service:session', Service.extend({}));
+  });
+
+  // Replace this with your real tests.
+  test('it exists', function (assert) {
+    let service = this.owner.lookup('service:map-service');
+    assert.ok(service);
+  });
 });
