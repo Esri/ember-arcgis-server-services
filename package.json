@@ -16,9 +16,10 @@
   },
   "scripts": {
     "build": "ember build",
-    "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
+    "lint:js": "eslint ./*.js addon addon-test-support app blueprints config lib server test-support tests",
     "start": "ember serve",
-    "test": "ember try:each --skip-cleanup",
+    "test": "ember test",
+    "test:all": "ember try:each --skip-cleanup",
     "deploy": "ember github-pages:commit --environment=github --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\";"
   },
   "dependencies": {
@@ -26,7 +27,7 @@
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
-    "ember-cli": "~3.0.4",
+    "ember-cli": "~3.1.4",
     "ember-cli-active-link-wrapper": "0.3.2",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
@@ -47,7 +48,7 @@
     "ember-resolver": "^4.0.0",
     "ember-sinon": "^1.0.1",
     "ember-sinon-qunit": "^2.0.0",
-    "ember-source": "~3.0.0",
+    "ember-source": "~3.1.0",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
     "eslint-config-semistandard": "~7.0.0",
