@@ -13,8 +13,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-arcgis-server-services',
-  isDevelopingAddon: function () {
-    return false;
-  }
+  name: require('./package').name
 };
