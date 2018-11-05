@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <!--
+    This page is loaded after the authorize page has done it's work. This
+    simply updates local storage and the rest of torii takes over from there -->
+    <script>
+    // Torii works by using localStorage to "communicate" between the pop-up/iframe and the running app
+    // First thing we need to do is get the pending request key out of the well-known
+    // CURRENT_REQUEST_KEY in localStorage
+    var CURRENT_REQUEST_KEY = '__torii_request';
+    //  The pending request key is a one-time use key...
+    var pendingRequestKey = window.localStorage.getItem(CURRENT_REQUEST_KEY);
+    // Now we clear out the pending request key, otherwise Torii will think
+    // is is still waiting for an oAuth process to finish...
+    window.localStorage.removeItem(CURRENT_REQUEST_KEY);
+
+    // Lets ensure we actually got a key...
+    if (pendingRequestKey) {
+      // now we want to get the url location - aka the hash part of the url.
+      var url = window.location.toString();
+      window.localStorage.setItem(pendingRequestKey, url);
+      window.close();
+    }
+    </script>
+  </body>
+</html>
