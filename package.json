@@ -1,6 +1,6 @@
 {
   "name": "ember-arcgis-server-services",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Ember services for dealing with ArcGIS Map, Feature and Image Servers",
   "keywords": [
     "ember-addon"
