@@ -2,10 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 1.5.0
 ### Changed
 - configure eslint to prohibit use of jQuery
 - configure eslint to prohibit use of global fetch
+- bump ember to 3.5
 
 ## 1.4.1
 ### Changed
