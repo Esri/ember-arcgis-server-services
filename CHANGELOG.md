@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Changed
+- fixed deploy script by installing ember-cli-github-pages
+
 ## 1.5.0
 ### Changed
 - configure eslint to prohibit use of jQuery
