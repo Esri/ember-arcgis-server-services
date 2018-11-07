@@ -30,6 +30,10 @@
   dependencies:
     tslib "^1.7.1"
 
+"@esri/arcgis-rest-common-types@^1.7.1":
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/@esri/arcgis-rest-common-types/-/arcgis-rest-common-types-1.13.2.tgz#acd1c5e87eaba0fccdd6a9bab8ef25c28b88ed81"
+
 "@esri/arcgis-rest-request@^1.7.1":
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/@esri/arcgis-rest-request/-/arcgis-rest-request-1.13.1.tgz#93bebcc4dca719ebf85152e9963421e094410a18"
@@ -7095,15 +7099,16 @@ to-utf8@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/to-utf8/-/to-utf8-0.0.1.tgz#d17aea72ff2fba39b9e43601be7b3ff72e089852"
 
-torii-provider-arcgis@^2.0.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/torii-provider-arcgis/-/torii-provider-arcgis-2.1.1.tgz#f0bb6d7589b3c3fb92eea6ec51d99fb7b0eff9e2"
+torii-provider-arcgis@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/torii-provider-arcgis/-/torii-provider-arcgis-2.2.0.tgz#ffb97d5132ca5e594f003acaac0f8968365a708a"
   dependencies:
     "@esri/arcgis-rest-auth" "^1.7.1"
+    "@esri/arcgis-rest-common-types" "^1.7.1"
     "@esri/arcgis-rest-request" "^1.7.1"
     broccoli-funnel "^2.0.1"
     broccoli-merge-trees "^2.0.0"
-    ember-cli-babel "^6.6.0"
+    ember-cli-babel "^6.16.0"
     ember-fetch "^5.1.1"
     torii "0.10.1"
 
