@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 1.6.0
 ### Changed
 - fixed deploy script by installing ember-cli-github-pages
 - upgrade torii-provider-arcgis to 2.2 (ember 3.5)
