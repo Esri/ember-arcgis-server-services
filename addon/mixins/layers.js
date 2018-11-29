@@ -1,6 +1,8 @@
 import Mixin from '@ember/object/mixin';
 import { parseServiceUrl } from '../utils/parse-url';
-import encodeForm from '../utils/encode-form';
+import { request } from '@esri/arcgis-rest-request';
+import { queryFeatures, getLayer, getFeature } from '@esri/arcgis-rest-feature-service';
+// to do: ember fetch?
 
 export default Mixin.create({
   init: function () {
@@ -16,17 +18,23 @@ export default Mixin.create({
       const serviceUrl = parseServiceUrl(url);
       layerUrl = `${serviceUrl}/${options.layer}`;
     }
-    return this.request(layerUrl + '?f=json', options);
+
+    // previously we passed along options too. could something else have been in there?
+    return getLayer(layerUrl, {
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
    * Get info about all layers
    */
-  getLayersInfo (url, options) {
+  getLayersInfo (url) {
     const serviceUrl = parseServiceUrl(url);
-    let layersUrl = `${serviceUrl}/layers?f=json`;
+    let layersUrl = `${serviceUrl}/layers`;
     // make the request
-    return this.request(layersUrl, options)
+    return request(layersUrl, {
+      authentication: this.get('session.authMgr')
+    })
       .then(layerInfo => {
         const merged = [...layerInfo.layers, ...layerInfo.tables];
         this.set('layers', merged);
@@ -39,16 +47,24 @@ export default Mixin.create({
    * Search for records
    */
   query (url, options) {
-    let encoded = encodeForm(options);
-    url = url + '/query?f=json&' + encoded;
-    return this.request(url, { method: 'GET' });
+    // no support for spread operators here :(
+    const queryOptions = Object.assign({
+      url,
+      httpMethod: "GET",
+      authentication: this.get('session.authMgr')
+    }, options);
+    return queryFeatures(queryOptions);
   },
 
   /**
    * Get a record by id
    */
-  getById (url, id, options) {
-    url = `${url}/${id}?f=json`;
-    return this.request(url, options);
+  getById (url, id) {
+    return getFeature({
+      url,
+      id,
+      httpMethod: "GET",
+      authentication: this.get('session.authMgr')
+    });
   }
 });

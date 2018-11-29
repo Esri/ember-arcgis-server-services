@@ -1,4 +1,3 @@
-import { resolve } from 'rsvp';
 import { module } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import Service from '@ember/service';
@@ -16,35 +15,5 @@ module('Unit | Service | feature service', function(hooks) {
   test('it exists', function (assert) {
     let service = this.owner.lookup('service:feature-service');
     assert.ok(service);
-  });
-
-  test('getLayerInfo takes url', function (assert) {
-    let service = this.owner.lookup('service:feature-service');
-    this.stub(service, 'request').callsFake(function (/*url, options */) {
-      return resolve({prop: 'value'});
-    });
-    return service.getLayerInfo('http://foo.com/arcgis/rest/services/wat/featureserver')
-    .then((response) => {
-      assert.equal(response.prop, 'value');
-      let args = service.request.getCall(0).args;
-      let url = args[0];
-      assert.equal(url, 'http://foo.com/arcgis/rest/services/wat/featureserver?f=json');
-      assert.ok(service.request.calledOnce);
-    });
-  });
-
-  test('getLayerInfo takes url and layerId', function (assert) {
-    let service = this.owner.lookup('service:feature-service');
-    this.stub(service, 'request').callsFake(function (/*url, options */) {
-      return resolve({prop: 'value'});
-    });
-    return service.getLayerInfo('http://foo.com/arcgis/rest/services/wat/featureserver', {layer: 3})
-    .then((response) => {
-      assert.equal(response.prop, 'value');
-      let args = service.request.getCall(0).args;
-      let url = args[0];
-      assert.equal(url, 'http://foo.com/arcgis/rest/services/wat/featureserver/3?f=json');
-      assert.ok(service.request.calledOnce);
-    });
   });
 });

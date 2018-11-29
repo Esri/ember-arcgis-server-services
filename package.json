@@ -19,11 +19,15 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test",
+    "test": "npm run lint:js && ember test",
     "test:all": "ember try:each --skip-cleanup",
     "deploy": "ember github-pages:commit --environment=github --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\";"
   },
   "dependencies": {
+    "@esri/arcgis-rest-feature-service": "^1.14.2",
+    "@esri/arcgis-rest-request": "^1.14.2",
+    "broccoli-funnel": "^2.0.1",
+    "broccoli-merge-trees": "^2.0.0",
     "ember-cli-babel": "^6.16.0"
   },
   "devDependencies": {
