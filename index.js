@@ -1,17 +1,48 @@
-/*    Copyright 2017 Esri
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-       http://www.apache.org/licenses/LICENSE-2.0
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License. */
-
+/* Copyright (c) 2017-2018 Environmental Systems Research Institute, Inc.
+ * Apache-2.0 */
 /* jshint node: true */
 'use strict';
+var path = require('path');
+var Funnel = require('broccoli-funnel');
+var MergeTrees = require('broccoli-merge-trees');
 
 module.exports = {
-  name: require('./package').name
+  name: require('./package').name,
+
+  isDevelopingAddon: function () {
+    return false;
+  },
+
+  included (/* app */) {
+    this._super.included.apply(this, arguments);
+    // bundle scripts from vendor folder
+    this.import('vendor/@esri/arcgis-rest-request/request.umd.js');
+    this.import('vendor/@esri/arcgis-rest-feature-service/feature-service.umd.js');
+    this.import('vendor/shims/@esri/arcgis-rest-request.js');
+    this.import('vendor/shims/@esri/arcgis-rest-feature-service.js');
+  },
+
+  treeForVendor (vendorTree) {
+    var arcgisRequestTree = new Funnel(path.dirname(require.resolve('@esri/arcgis-rest-request/dist/umd/request.umd.js')), {
+      files: ['request.umd.js', 'request.umd.js.map'],
+      destDir: '@esri/arcgis-rest-request'
+    });
+
+    var arcgisFeatureServiceTree = new Funnel(path.dirname(require.resolve('@esri/arcgis-rest-feature-service/dist/umd/feature-service.umd.js')), {
+      files: ['feature-service.umd.js', 'feature-service.umd.js.map'],
+      destDir: '@esri/arcgis-rest-feature-service'
+    });
+
+    var treesToMerge = [
+      arcgisRequestTree,
+      arcgisFeatureServiceTree
+    ];
+
+    // if we got a vendorTree, and add it in
+    if (vendorTree) {
+      treesToMerge.unshift(vendorTree);
+    }
+
+    return new MergeTrees(treesToMerge);
+  }
 };
