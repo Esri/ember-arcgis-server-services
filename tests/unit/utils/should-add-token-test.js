@@ -104,4 +104,29 @@ module('Unit | Utility | parse-url', function() {
     };
     assert.notOk(shouldAddToken(url, serverInfo, portalInfo));
   });
+
+  test('should send token to self-hosted FS', function(assert) {
+    const url = 'https://PNP00035.esri.com/server/rest/services/Hosted/Federal_Correctional_Facilities/FeatureServer?f=json';
+    // this is the actual response from pnp00035.esri.com of 11/30/18
+
+    const serverInfo = {
+      "currentVersion": 10.61,
+      "fullVersion": "10.6.1",
+      "soapUrl": "https://pnp00035.esri.com/server/services",
+      "secureSoapUrl": null,
+      "owningSystemUrl": "https://pnp00035.esri.com/portal",
+      "authInfo": {
+        "isTokenBasedSecurity": true,
+        "tokenServicesUrl": "https://pnp00035.esri.com/portal/sharing/rest/generateToken"
+      }
+    }
+
+    const portalInfo = {
+      portalHostname: 'pnp00035.esri.com/portal',
+      authorizedCrossOriginDomains: []
+    };
+    assert.ok(shouldAddToken(url, serverInfo, portalInfo));
+  })
+
+
 });
