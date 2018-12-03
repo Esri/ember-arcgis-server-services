@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.6.1
+### Fixed
+- update token logic to handle cases where services have UPCASED server names, but portalHostname is lowercase.
+
 ## 1.6.0
 ### Changed
 - fixed deploy script by installing ember-cli-github-pages

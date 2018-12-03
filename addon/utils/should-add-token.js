@@ -8,9 +8,9 @@ export default function shouldAddToken (url, serverInfo, portalInfo) {
   // check if the server even accepts tokens
   const acceptsTokens = getWithDefault(serverInfo, 'authInfo.isTokenBasedSecurity', false);
   if (acceptsTokens) {
-    const serverDomain = stripToDomain(url);
-    const portalDomain = stripToDomain(portalInfo.portalHostname);
-    const owningDomain = stripToDomain(serverInfo.owningSystemUrl);
+    const serverDomain = stripToDomain(url).toLowerCase();
+    const portalDomain = stripToDomain(portalInfo.portalHostname).toLowerCase();
+    const owningDomain = stripToDomain(serverInfo.owningSystemUrl).toLowerCase();
     const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
     const isAuthorizedUrl = authorizedCrossOriginDomains.indexOf(serverDomain) > -1;
     const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');

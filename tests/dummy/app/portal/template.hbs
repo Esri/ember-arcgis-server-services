@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Portal Hosted Servic Tester</h2>
+      <p>Testing against a portal is difficult, so we use this instead.</p>
+    </div>
+    <div class="col-sm-12">
+      <form>
+        <div class="form-group">
+          <label for="token">Valid Server Token</label>
+          {{input name="token" value=token class="form-control"}}
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">serviceUrl</label>
+          {{input value=serviceUrl class="form-control"}}
+        </div>
+        <button type="button" class="btn btn-primary" {{action "getLayerInfo"}}>Get Layer Info</button>
+      </form>
+      <h5>Layer Output</h5>
+      <div>
+        <pre>{{json}}</pre>
+      </div>
+    </div>
+
+  </div>
+  {{outlet}}
+</div>

@@ -14,6 +14,7 @@ Router.map(function () {
     });
     this.route('new');
   });
+  this.route('portal');
 });
 
 export default Router;
