@@ -1,6 +1,13 @@
 import Service from '@ember/service';
 import serviceMixin from '../mixins/ags-service-mixin';
 import layerMixin from '../mixins/layers';
+import {
+  getFeature,
+  addFeatures,
+  updateFeatures,
+  deleteFeatures,
+  getAttachments
+} from "@esri/arcgis-rest-feature-service";
 
 export default Service.extend(serviceMixin, layerMixin, {
 
@@ -8,30 +15,45 @@ export default Service.extend(serviceMixin, layerMixin, {
    * Get a record by id
    */
   getById (url, id) {
-    url = `${url}/${id}?f=json`;
-    return this.request(url, {method: 'GET'});
+    // why is there an optionless getById() here and another in mixins/layers.js?
+    return getFeature({
+      url,
+      id,
+      httpMethod: "GET"
+    });
   },
 
   /**
    * Get attachments for a record by id
    */
   getAttachmentsById (url, id) {
-    url = `${url}/${id}/attachments?f=json`;
-    return this.request(url, {method: 'GET'});
+    return getAttachments({
+      url,
+      featureId: id,
+      httpMethod: 'GET'
+    })
   },
 
   /**
    * Update a single feature
    */
-  updateFeature (url, feature, token) {
-    return this.updateFeatures(url, [feature], token);
+  updateFeature (url, feature) {
+    return updateFeatures({
+      url,
+      features: [feature],
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
    * Update a set of features
    */
-  updateFeatures (url, features, token) {
-    return this.applyEdits(url, [], features, [], token);
+  updateFeatures (url, features) {
+    return updateFeatures({
+      url,
+      features,
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
@@ -41,6 +63,7 @@ export default Service.extend(serviceMixin, layerMixin, {
    * data.keywords
    */
   updateAttachment (url, data, token) {
+    // the feature id must already be embedded in the url
     url = url + '/updateAttachment?f=json';
     return this.attachmentsRequest(url, data, token);
   },
@@ -48,18 +71,24 @@ export default Service.extend(serviceMixin, layerMixin, {
   /**
    * Add a single feature
    */
-  addFeature (url, feature, token) {
-    // wrap into an array...
-    let adds = [feature];
+  addFeature (url, feature) {
     // delegate to addFeatures
-    return this.addFeatures(url, adds, token);
+    return addFeatures({
+      url,
+      features: [feature],
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
    * Add a set of features
    */
-  addFeatures (url, features, token) {
-    return this.applyEdits(url, features, [], [], token);
+  addFeatures (url, features) {
+    return addFeatures({
+      url,
+      features,
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
@@ -75,15 +104,23 @@ export default Service.extend(serviceMixin, layerMixin, {
   /**
    * Delete a single feature
    */
-  deleteFeature (url, objectId, token) {
-    return this.deleteFeatures(url, [objectId], token);
+  deleteFeature (url, objectId) {
+    return deleteFeatures({
+      url,
+      objectIds: [objectId],
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
    * Delete a set of features
    */
-  deleteFeatures (url, objectIds, token) {
-    return this.applyEdits(url, [], [], objectIds, token);
+  deleteFeatures (url, objectIds) {
+    return deleteFeatures({
+      url,
+      objectIds,
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
@@ -100,6 +137,7 @@ export default Service.extend(serviceMixin, layerMixin, {
    * Actually send the edits to the Service
    */
   applyEdits (url, adds, updates, deletes, token) {
+    // no equivalent method exists in rest-js (yet)
     url = url + '/applyEdits';
     let options = {
       method: 'POST',
