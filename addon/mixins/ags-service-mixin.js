@@ -79,9 +79,11 @@ export default Mixin.create({
     return this.getLayerInfo(url, options);
   },
 
-  getLayerInfo (url, options) {
-    return this.request(url + '?f=json', options);
-  },
+  // This method was also declared in the ags-service-mixin and was shadowing that implementation
+  // So it's removed now...
+  // getLayerInfo (url, options) {
+  //   return this.request(url + '?f=json', options);
+  // },
 
   /**
   * Get the base server info.
