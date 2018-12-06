@@ -1,8 +1,8 @@
 import Service from '@ember/service';
 import serviceMixin from '../mixins/ags-service-mixin';
 import layerMixin from '../mixins/layers';
+import { debug } from '@ember/debug';
 import {
-  getFeature,
   addFeatures,
   updateFeatures,
   deleteFeatures,
@@ -14,14 +14,9 @@ export default Service.extend(serviceMixin, layerMixin, {
   /**
    * Get a record by id
    */
-  getById (url, id) {
-    // why is there an optionless getById() here and another in mixins/layers.js?
-    return getFeature({
-      url,
-      id,
-      httpMethod: "GET"
-    });
-  },
+  // getById (url, id) {
+  // ***> implemented in layerMixin
+  // },
 
   /**
    * Get attachments for a record by id
@@ -30,7 +25,8 @@ export default Service.extend(serviceMixin, layerMixin, {
     return getAttachments({
       url,
       featureId: id,
-      httpMethod: 'GET'
+      httpMethod: 'GET',
+      authentication: this.get('session.authMgr')
     })
   },
 
@@ -63,6 +59,7 @@ export default Service.extend(serviceMixin, layerMixin, {
    * data.keywords
    */
   updateAttachment (url, data, token) {
+    debug(`WARNING: feature-service.updateAttachment does not use ArcGIS Rest JS.`);
     // the feature id must already be embedded in the url
     url = url + '/updateAttachment?f=json';
     return this.attachmentsRequest(url, data, token);
@@ -97,6 +94,7 @@ export default Service.extend(serviceMixin, layerMixin, {
    * data.keywords
    */
   addAttachment (url, data, token) {
+    debug(`WARNING: feature-service.addAttachment does not use ArcGIS Rest JS.`);
     url = url + '/addAttachment?f=json';
     return this.attachmentsRequest(url, data, token);
   },
@@ -129,6 +127,7 @@ export default Service.extend(serviceMixin, layerMixin, {
    * data.keywords
    */
   deleteAttachments (url, data, token) {
+    debug(`WARNING: feature-service.deleteAttachments does not use ArcGIS Rest JS.`);
     url = url + '/deleteAttachments?f=json';
     return this.attachmentsRequest(url, data, token);
   },
@@ -155,6 +154,7 @@ export default Service.extend(serviceMixin, layerMixin, {
   },
 
   attachmentsRequest (url, data, token) {
+    debug(`WARNING: feature-service.attachmentsRequest does not use ArcGIS Rest JS.`);
     let options = {
       method: 'POST',
       mimeType: 'multipart/form-data',

@@ -16,4 +16,5 @@ module('Unit | Service | feature service', function(hooks) {
     let service = this.owner.lookup('service:feature-service');
     assert.ok(service);
   });
+
 });
