@@ -90,6 +90,7 @@ export default Mixin.create({
   * Returns stuff like version, services and folders
    */
   getServerInfo (url, options) {
+    debug(`WARNING: service-mixin.getServerInfo does not use ArcGIS Rest JS.`);
     const serviceUrl = parseServiceUrl(url);
     let service = url;
     if (serviceUrl) {
@@ -102,6 +103,7 @@ export default Mixin.create({
    * Get the authentication information from a server.
    */
   getAuthInfo (url, options) {
+    debug(`WARNING: service-mixin.getAuthInfo does not use ArcGIS Rest JS.`);
     let server = url;
     const serverUrl = parseServerUrl(url);
     if (serverUrl) {

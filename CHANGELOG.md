@@ -2,7 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 1.6.1
+## 1.7.1
+### Fixed
+- getById, getAttachmentsById were not passing the session auth to ArcGIS Rest JS
+
+## 1.7.0
 ### Fixed
 - update token logic to handle cases where services have UPCASED server names, but portalHostname is lowercase.
 
