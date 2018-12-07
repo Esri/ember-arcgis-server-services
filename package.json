@@ -21,6 +21,7 @@
     "start": "ember serve",
     "test": "npm run lint:js && ember test",
     "test:all": "ember try:each --skip-cleanup",
+    "deploy:surge": "ember surge --new-domain='eass.surge.sh' --environment=surge-qa",
     "deploy": "ember github-pages:commit --environment=github --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\";"
   },
   "dependencies": {

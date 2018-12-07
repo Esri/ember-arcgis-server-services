@@ -9,6 +9,7 @@ export default Mixin.create({
     this._super(); // ensure a good citizen in the super chain
   },
 
+
   /**
    * Get the layer info
    */
@@ -20,9 +21,12 @@ export default Mixin.create({
     }
 
     // previously we passed along options too. could something else have been in there?
-    return getLayer(layerUrl, {
-      authentication: this.get('session.authMgr')
-    });
+    return getLayer(layerUrl)
+    .catch(err => {
+      if (err.name === 'ArcGISAuthError') {
+        return getLayer(layerUrl, {authentication: this.get('session.authMgr')})
+      }
+    })
   },
 
   /**
@@ -31,16 +35,20 @@ export default Mixin.create({
   getLayersInfo (url) {
     const serviceUrl = parseServiceUrl(url);
     let layersUrl = `${serviceUrl}/layers`;
+    const after = (response) => {
+      const merged = [...response.layers, ...response.tables];
+      this.set('layers', merged);
+      return merged;
+    };
     // make the request
-    return request(layersUrl, {
-      authentication: this.get('session.authMgr')
+    return request(layersUrl)
+    .then(after)
+    .catch(err => {
+      if (err.name === 'ArcGISAuthError') {
+        return request(layersUrl, {authentication: this.get('session.authMgr')})
+        .then(after);
+      }
     })
-      .then(layerInfo => {
-        const merged = [...layerInfo.layers, ...layerInfo.tables];
-        this.set('layers', merged);
-        return merged;
-      })
-      .catch(e => Promise.reject(e));
   },
 
   /**
@@ -50,21 +58,32 @@ export default Mixin.create({
     // no support for spread operators here :(
     const queryOptions = Object.assign({
       url,
-      httpMethod: "GET",
-      authentication: this.get('session.authMgr')
+      httpMethod: "GET"
     }, options);
-    return queryFeatures(queryOptions);
+    return queryFeatures(queryOptions)
+    .catch(err => {
+      if (err.name === 'ArcGISAuthError') {
+        queryOptions.authentication = this.get('session.authMgr');
+        return queryFeatures(queryOptions)
+      }
+    })
   },
 
   /**
    * Get a record by id
    */
   getById (url, id) {
-    return getFeature({
+    const options ={
       url,
       id,
       httpMethod: "GET",
-      authentication: this.get('session.authMgr')
-    });
+    };
+    return getFeature(options)
+    .catch(err => {
+      if (err.name === 'ArcGISAuthError') {
+        options.authentication = this.get('session.authMgr');
+        return getFeature(options);
+      }
+    })
   }
 });

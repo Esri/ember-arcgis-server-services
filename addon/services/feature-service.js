@@ -18,15 +18,22 @@ export default Service.extend(serviceMixin, layerMixin, {
   // ***> implemented in layerMixin
   // },
 
+
   /**
    * Get attachments for a record by id
    */
   getAttachmentsById (url, id) {
-    return getAttachments({
+    const options = {
       url,
       featureId: id,
-      httpMethod: 'GET',
-      authentication: this.get('session.authMgr')
+      httpMethod: 'GET'
+    }
+    return getAttachments(options)
+    .catch((err) => {
+      if (err.name === 'ArcGISAuthError') {
+        options.authentication = this.get('session.authMgr');
+        return getAttachments(options);
+      }
     })
   },
 

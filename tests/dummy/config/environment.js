@@ -56,10 +56,16 @@ module.exports = function (environment) {
     ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = `https://${env}ext.arcgis.com`;
   }
 
-  if (environment === 'surge') {
+  if (environment === 'surge-dev') {
     ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'ifq94vTWyyZclwNz';
     ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = 'https://devext.arcgis.com';
     ENV.APP.domainServiceUrl = 'https://servicesdev.arcgis.com/LjjARY1mkhxulWPq/arcgis/rest/services/sitedomains/FeatureServer/0';
+  }
+
+  if (environment === 'surge-qa') {
+    ENV.torii.providers['arcgis-oauth-bearer'].apiKey = 'VpiQwiuWl7KMTGys';
+    ENV.torii.providers['arcgis-oauth-bearer'].portalUrl = 'https://qaext.arcgis.com';
+    ENV.APP.domainServiceUrl = 'https://servicesqa.arcgis.com/97KLIFOSt5CxbiRI/arcgis/rest/services/sitedomains/FeatureServer/0';
   }
 
   if (environment === 'github') {
