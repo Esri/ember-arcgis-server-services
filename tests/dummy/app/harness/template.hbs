@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Test Harness</h2>
+      <p>From this page you can choose a service to hit and it will exercise the api and show results below</p>
+    </div>
+    <div class="col-sm-12">
+      <div class="list-group">
+        {{#each servers as |server idx|}}
+          <button class="list-group-item" {{action 'setServerUrl' server.url}}>{{server.desc}}</button>
+        {{/each}}
+      </div>
+      <p>Currently Using: {{serverUrl}}</p>
+      <button type="button" class="btn btn-primary" {{action "runTests"}}>{{buttonText}}</button>
+
+      <h4>Output</h4>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      {{#each outputs as |entry idx|}}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{idx}}" aria-expanded="true" aria-controls="collapseOne">
+                <h5>featureService.{{entry.name}}(...) {{entry.state}}</h5>
+              </a>
+            </h4>
+          </div>
+          <div id="collapse{{idx}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <pre>{{entry.json}}</pre>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+      </div>
+
+    </div>
+
+  </div>
+  {{outlet}}
+</div>

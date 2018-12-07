@@ -15,6 +15,7 @@ Router.map(function () {
     this.route('new');
   });
   this.route('portal');
+  this.route('harness');
 });
 
 export default Router;
