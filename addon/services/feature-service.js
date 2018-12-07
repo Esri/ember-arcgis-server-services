@@ -41,22 +41,34 @@ export default Service.extend(serviceMixin, layerMixin, {
    * Update a single feature
    */
   updateFeature (url, feature) {
-    return updateFeatures({
+    const options = {
       url,
-      features: [feature],
-      authentication: this.get('session.authMgr')
-    });
+      features: [feature]
+    };
+    return updateFeatures(options)
+      .catch(err => {
+        if (err.name === 'ArcGISAuthError') {
+          options.authentication = this.get('session.authMgr')
+          return updateFeatures(options);
+        }
+      });
   },
 
   /**
    * Update a set of features
    */
   updateFeatures (url, features) {
-    return updateFeatures({
+    const options = {
       url,
-      features,
-      authentication: this.get('session.authMgr')
-    });
+      features
+    };
+    return updateFeatures(options)
+      .catch(err => {
+        if (err.name === 'ArcGISAuthError') {
+          options.authentication = this.get('session.authMgr')
+          return updateFeatures(options);
+        }
+      });
   },
 
   /**
@@ -77,22 +89,34 @@ export default Service.extend(serviceMixin, layerMixin, {
    */
   addFeature (url, feature) {
     // delegate to addFeatures
-    return addFeatures({
+    const options = {
       url,
-      features: [feature],
-      authentication: this.get('session.authMgr')
-    });
+      features: [feature]
+    };
+    return addFeatures(options)
+      .catch(err => {
+        if (err.name === 'ArcGISAuthError') {
+          options.authentication = this.get('session.authMgr')
+          return addFeatures(options);
+        }
+      });
   },
 
   /**
    * Add a set of features
    */
   addFeatures (url, features) {
-    return addFeatures({
+    const options = {
       url,
-      features,
-      authentication: this.get('session.authMgr')
-    });
+      features
+    };
+    return addFeatures(options)
+      .catch(err => {
+        if (err.name === 'ArcGISAuthError') {
+          options.authentication = this.get('session.authMgr')
+          return addFeatures(options);
+        }
+      });
   },
 
   /**
@@ -110,22 +134,34 @@ export default Service.extend(serviceMixin, layerMixin, {
    * Delete a single feature
    */
   deleteFeature (url, objectId) {
-    return deleteFeatures({
+    const options = {
       url,
-      objectIds: [objectId],
-      authentication: this.get('session.authMgr')
-    });
+      objectIds: [objectId]
+    };
+    return deleteFeatures(options)
+      .catch(err => {
+        if (err.name === 'ArcGISAuthError') {
+          options.authentication = this.get('session.authMgr')
+          return deleteFeatures(options);
+        }
+      });
   },
 
   /**
    * Delete a set of features
    */
   deleteFeatures (url, objectIds) {
-    return deleteFeatures({
+    const options = {
       url,
-      objectIds,
-      authentication: this.get('session.authMgr')
-    });
+      objectIds
+    };
+    return deleteFeatures(options)
+      .catch(err => {
+        if (err.name === 'ArcGISAuthError') {
+          options.authentication = this.get('session.authMgr')
+          return deleteFeatures(options);
+        }
+      });
   },
 
   /**

@@ -24,7 +24,7 @@ export default Controller.extend({
         desc: 'QA: Private : Hosted FS : Federated : owned by DC Dev'
       },
       {
-        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/NapervilleShelters/MapServer',
+        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/NapervilleShelters/FeatureServer',
         desc: 'QA: Public : Hosted : Not Federated : owned by Sample Server'
       },
       {
@@ -105,7 +105,7 @@ export default Controller.extend({
       });
     }
 
-    // do some layer queryies...
+    // do some layer queries...
     if (layersInfo.length) {
       const layerUrl = `${url}/0`;
       let allFeatures = {};
@@ -156,9 +156,49 @@ export default Controller.extend({
             });
           }
         }
+        // the standalone service support anonymous edits
+        if (layerUrl === 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/NapervilleShelters/FeatureServer/0') {
+          let addObjectId;
+          try {
+            const addFeature = await fs.addFeature(layerUrl, {
+              geometry: {
+                x: -118,
+                y: 34
+              }
+            });
+            addObjectId = addFeature.addResults[0].objectId;
+            outputs.push({
+              name: 'addFeature',
+              state: 'success',
+              json: JSON.stringify(addFeature, null, 2)
+            });
+
+          } catch(err) {
+            outputs.push({
+              name: 'addFeature',
+              state: 'error',
+              json: JSON.stringify(err, null, 2)
+            });
+          }
+          try {
+            const deleteFeature = await fs.deleteFeature(layerUrl, addObjectId);
+            outputs.push({
+              name: 'deleteFeature',
+              state: 'success',
+              json: JSON.stringify(deleteFeature, null, 2)
+            });
+          } catch(err) {
+            outputs.push({
+              name: 'deleteFeature',
+              state: 'error',
+              json: JSON.stringify(err, null, 2)
+            });
+          }
+        }
       }
     }
     // const allFeaturesFirstLayer = await fs.query(url)
+
 
 
 
