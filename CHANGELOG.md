@@ -1,8 +1,18 @@
-# ember-arcgis-server-services Change Log
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+# Changelog
 
-## 1.7.1
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+### [Unreleased][HEAD]
+
+## [1.7.2] - January 14th, 2019
+
+### Fixed
+- tokens are no longer appended to [non-federated](http://enterprise.arcgis.com/en/portal/latest/administer/linux/federate-an-arcgis-server-site-with-your-portal.htm) ArcGIS Server calls.
+
+## [1.7.1]
 ### Fixed
 - getById, getAttachmentsById were not passing the session auth to ArcGIS Rest JS
 
@@ -89,7 +99,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added sanity tests to `feature-service`
 
 ## 0.4.4
-### Fixed  
+### Fixed
 - `getLayerInfo()` signature changed to require `options`. This caused regressions in down-stream applications. Made `options` default to null.
 
 ## 0.4.3
@@ -139,3 +149,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - feature-service - getServiceInfo,query,add,delete,update,getLayerInfo
 - map-service - getServiceInfo, getLayerInfo
+
+[1.7.1]: https://github.com/Esri/ember-arcgis-portal-services/compare/v1.7.0...v1.7.1 "v1.7.1"
+[1.7.2]: https://github.com/Esri/ember-arcgis-portal-services/compare/v1.7.1...v1.7.2 "v1.7.2"
+[HEAD]: https://github.com/Esri/ember-arcgis-portal-services/compare/v1.7.2...HEAD "Unreleased Changes"
