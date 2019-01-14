@@ -10,11 +10,15 @@ export default function shouldAddToken (url, serverInfo, portalInfo) {
   if (acceptsTokens) {
     const serverDomain = stripToDomain(url).toLowerCase();
     const portalDomain = stripToDomain(portalInfo.portalHostname).toLowerCase();
-    const owningDomain = stripToDomain(serverInfo.owningSystemUrl).toLowerCase();
     const authorizedCrossOriginDomains = portalInfo.authorizedCrossOriginDomains || [];
     const isAuthorizedUrl = authorizedCrossOriginDomains.indexOf(serverDomain) > -1;
     const isArcGisDomain = !!url.toLowerCase().match('.arcgis.com/');
 
+    // if the server isn't federated with portal, dont send a token
+    if (!serverInfo.owningSystemUrl) {
+      return shouldSendToken;
+    }
+    const owningDomain = stripToDomain(serverInfo.owningSystemUrl).toLowerCase();
     // if all three are the same domain... send it
     if ((serverDomain === portalDomain) && (portalDomain === owningDomain)) {
       shouldSendToken = true;
