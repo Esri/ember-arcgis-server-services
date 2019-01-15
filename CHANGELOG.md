@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### [Unreleased][HEAD]
 
-## [1.7.2] - January 14th, 2019
-
+## [1.7.3] - January 14th, 2019
 ### Fixed
 - tokens are no longer appended to [non-federated](http://enterprise.arcgis.com/en/portal/latest/administer/linux/federate-an-arcgis-server-site-with-your-portal.htm) ArcGIS Server calls.
+
+## [1.7.2]
+### Fixed
+- Authentication is only passed by getLayer and getLayersInfo when an anonymous request triggers an error
 
 ## [1.7.1]
 ### Fixed
@@ -150,6 +153,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - feature-service - getServiceInfo,query,add,delete,update,getLayerInfo
 - map-service - getServiceInfo, getLayerInfo
 
-[1.7.1]: https://github.com/Esri/ember-arcgis-portal-services/compare/v1.7.0...v1.7.1 "v1.7.1"
-[1.7.2]: https://github.com/Esri/ember-arcgis-portal-services/compare/v1.7.1...v1.7.2 "v1.7.2"
-[HEAD]: https://github.com/Esri/ember-arcgis-portal-services/compare/v1.7.2...HEAD "Unreleased Changes"
+[1.7.1]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.0...v1.7.1 "v1.7.1"
+[1.7.2]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.1...v1.7.2 "v1.7.2"
+[HEAD]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.2...HEAD "Unreleased Changes"
