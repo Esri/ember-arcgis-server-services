@@ -155,4 +155,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [1.7.1]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.0...v1.7.1 "v1.7.1"
 [1.7.2]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.1...v1.7.2 "v1.7.2"
-[HEAD]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.2...HEAD "Unreleased Changes"
+[1.7.2]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.2...v1.7.3 "v1.7.3"
+[HEAD]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.3...HEAD "Unreleased Changes"
