@@ -119,7 +119,7 @@ module('Unit | Utility | parse-url', function() {
         "isTokenBasedSecurity": true,
         "tokenServicesUrl": "https://pnp00035.esri.com/portal/sharing/rest/generateToken"
       }
-    }
+    };
 
     const portalInfo = {
       portalHostname: 'pnp00035.esri.com/portal',
@@ -128,5 +128,25 @@ module('Unit | Utility | parse-url', function() {
     assert.ok(shouldAddToken(url, serverInfo, portalInfo));
   })
 
+  test('shouldAddToken returns false when server is not federated', function (assert) {
+    const url = 'https://PNP00035.esri.com/server/rest/services/Hosted/Federal_Correctional_Facilities/FeatureServer?f=json';
+    // this is the actual response from pnp00035.esri.com of 11/30/18
 
+    const serverInfo = {
+      "currentVersion": 10.61,
+      "fullVersion": "10.6.1",
+      "soapUrl": "https://pnp00035.esri.com/server/services",
+      "secureSoapUrl": null,
+      "authInfo": {
+        "isTokenBasedSecurity": true,
+        "tokenServicesUrl": "https://pnp00035.esri.com/portal/sharing/rest/generateToken"
+      }
+    };
+
+    const portalInfo = {
+      portalHostname: 'pnp00035.esri.com/portal',
+      authorizedCrossOriginDomains: []
+    };
+    assert.notOk(shouldAddToken(url, serverInfo, portalInfo));
+  });
 });
