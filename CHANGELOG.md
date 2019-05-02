@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.7.1]
 ### Fixed
-- getById, getAttachmentsById were not passing the session auth to ArcGIS Rest JS
+- getById, getAttachmentsById were not passing the session auth to ArcGIS REST JS
 
 ## 1.7.0
 ### Fixed

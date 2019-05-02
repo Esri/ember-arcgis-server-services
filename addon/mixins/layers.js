@@ -1,7 +1,7 @@
 import Mixin from '@ember/object/mixin';
 import { parseServiceUrl } from '../utils/parse-url';
 import { request } from '@esri/arcgis-rest-request';
-import { queryFeatures, getLayer, getFeature } from '@esri/arcgis-rest-feature-service';
+import { queryFeatures, getLayer, getFeature } from '@esri/arcgis-rest-feature-layer';
 // to do: ember fetch?
 
 export default Mixin.create({
@@ -21,12 +21,10 @@ export default Mixin.create({
     }
 
     // previously we passed along options too. could something else have been in there?
-    return getLayer(layerUrl)
-    .catch(err => {
-      if (err.name === 'ArcGISAuthError') {
-        return getLayer(layerUrl, {authentication: this.get('session.authMgr')})
-      }
-    })
+    return getLayer({
+      url: layerUrl,
+      authentication: this.get('session.authMgr')
+    });
   },
 
   /**
@@ -41,14 +39,10 @@ export default Mixin.create({
       return merged;
     };
     // make the request
-    return request(layersUrl)
-    .then(after)
-    .catch(err => {
-      if (err.name === 'ArcGISAuthError') {
-        return request(layersUrl, {authentication: this.get('session.authMgr')})
-        .then(after);
-      }
+    return request(layersUrl, {
+      authentication: this.get('session.authMgr')
     })
+    .then(after);
   },
 
   /**
@@ -58,32 +52,20 @@ export default Mixin.create({
     // no support for spread operators here :(
     const queryOptions = Object.assign({
       url,
-      httpMethod: "GET"
+      authentication: this.get('session.authMgr')
     }, options);
-    return queryFeatures(queryOptions)
-    .catch(err => {
-      if (err.name === 'ArcGISAuthError') {
-        queryOptions.authentication = this.get('session.authMgr');
-        return queryFeatures(queryOptions)
-      }
-    })
+    return queryFeatures(queryOptions);
   },
 
   /**
    * Get a record by id
    */
   getById (url, id) {
-    const options ={
+    const options = {
       url,
       id,
-      httpMethod: "GET",
+      authentication: this.get('session.authMgr')
     };
-    return getFeature(options)
-    .catch(err => {
-      if (err.name === 'ArcGISAuthError') {
-        options.authentication = this.get('session.authMgr');
-        return getFeature(options);
-      }
-    })
+    return getFeature(options);
   }
 });
