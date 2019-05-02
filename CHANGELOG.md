@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### [Unreleased][HEAD]
 
+### Fixed
+- authenticated sessions are now passed through consistently, with appropriate behavior for both secure federated and public non-federated services
+
+### Changed
+- ArcGIS REST JS v2.x is now used under the hood
+- ember-auto-import is now used to load ArcGIS REST JS
+
 ## [1.7.3] - January 14th, 2019
 ### Fixed
 - tokens are no longer appended to [non-federated](http://enterprise.arcgis.com/en/portal/latest/administer/linux/federate-an-arcgis-server-site-with-your-portal.htm) ArcGIS Server calls.
