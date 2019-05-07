@@ -20,9 +20,9 @@
         role="tablist"
         aria-multiselectable="true"
       >
-        {{#each outputs as |entry|}}
+        {{#each outputs as |entry idx|}}
           <div class="panel panel-default">
-            <div class="panel-heading" id="headingOne">
+            <div class="panel-heading" id="heading{{idx}}">
               <h4 class="panel-title">
                 <a
                   role="button"
