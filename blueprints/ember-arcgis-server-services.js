@@ -17,8 +17,12 @@ module.exports = {
 
   afterInstall(/* options */) {
     // ensure peerDependencies are installed
-    this.addPackageToProject('@esri/arcgis-rest-request', '^2.0.0');
-    this.addPackageToProject('@esri/arcgis-rest-feature-layer', '^2.0.0');
+    this.addPackagesToProject({
+      '@esri/arcgis-rest-auth': '^2.0.0',
+      '@esri/arcgis-rest-feature-layer': '^2.0.0',
+      '@esri/arcgis-rest-request': '^2.0.0',
+      '@esri/arcgis-rest-types': '^2.0.0'
+    });
 
     // will we still need to include torii's dependencies in the EASS package.json when were no longer npm linking?
   }
