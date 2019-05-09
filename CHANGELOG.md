@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### [Unreleased][HEAD]
 
+## [2.0.0]
+
 ### Fixed
 - authenticated sessions are now passed through consistently, with appropriate behavior for both secure federated and public non-federated services
 
@@ -160,7 +162,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - feature-service - getServiceInfo,query,add,delete,update,getLayerInfo
 - map-service - getServiceInfo, getLayerInfo
 
-[1.7.1]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.0...v1.7.1 "v1.7.1"
+[HEAD]: https://github.com/Esri/ember-arcgis-server-services/compare/v2.0.0...HEAD "Unreleased Changes"
+[2.0.0]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.3...v2.0.0 "v2.0.0"
+[1.7.3]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.2...v1.7.3 "v1.7.3"
 [1.7.2]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.1...v1.7.2 "v1.7.2"
-[1.7.2]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.2...v1.7.3 "v1.7.3"
-[HEAD]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.3...HEAD "Unreleased Changes"
+[1.7.1]: https://github.com/Esri/ember-arcgis-server-services/compare/v1.7.0...v1.7.1 "v1.7.1"
