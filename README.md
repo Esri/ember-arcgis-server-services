@@ -9,6 +9,7 @@
 [travis-img]: https://img.shields.io/travis/Esri/ember-arcgis-server-services/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/Esri/ember-arcgis-server-services
 
+**DEPRECATED: This addon has been deprecated. Instead you can use [@esri/arcgis-rest-feature-layer](https://esri.github.io/arcgis-rest-js/api/feature-layer/) via [ember-auto-import](https://github.com/ef4/ember-auto-import).**
 
 Ember Services for working with ArcGIS Server Services.
 
